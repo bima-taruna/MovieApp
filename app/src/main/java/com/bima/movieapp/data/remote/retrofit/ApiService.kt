@@ -1,7 +1,7 @@
 package com.bima.movieapp.data.remote.retrofit
 
-import com.bima.movieapp.data.dto.Movie
-import com.bima.movieapp.data.dto.NowPlaying
+import com.bima.movieapp.domain.model.Movie
+import com.bima.movieapp.domain.model.NowPlaying
 import retrofit2.http.GET
 import retrofit2.http.Path
 

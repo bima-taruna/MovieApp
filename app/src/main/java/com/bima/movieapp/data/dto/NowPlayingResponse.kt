@@ -1,6 +1,6 @@
-package com.bima.movieapp.data.remote.response
+package com.bima.movieapp.data.dto
 
-import com.bima.movieapp.data.dto.NowPlaying
+import com.bima.movieapp.domain.model.NowPlaying
 import com.google.gson.annotations.SerializedName
 
 data class NowPlayingResponse(

@@ -1,4 +1,4 @@
-package com.bima.movieapp.data.dto
+package com.bima.movieapp.domain.model
 
 data class NowPlaying(
     val id: Int,

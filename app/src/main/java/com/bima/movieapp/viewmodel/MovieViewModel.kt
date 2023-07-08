@@ -1,7 +1,6 @@
 package com.bima.movieapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.bima.movieapp.data.repository.MovieRepository
 
 class MovieViewModel:ViewModel() {
 //    private val repository = MovieRepository()
