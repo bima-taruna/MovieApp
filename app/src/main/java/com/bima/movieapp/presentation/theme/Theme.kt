@@ -1,4 +1,4 @@
-package com.bima.movieapp.ui.theme
+package com.bima.movieapp.presentation.theme
 
 import android.app.Activity
 import android.os.Build

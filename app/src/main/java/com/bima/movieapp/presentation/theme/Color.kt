@@ -1,4 +1,4 @@
-package com.bima.movieapp.ui.theme
+package com.bima.movieapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
