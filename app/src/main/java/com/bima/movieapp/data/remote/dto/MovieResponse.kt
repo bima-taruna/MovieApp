@@ -1,4 +1,4 @@
-package com.bima.movieapp.data.dto
+package com.bima.movieapp.data.remote.dto
 
 import com.bima.movieapp.domain.model.Movie
 import com.google.gson.annotations.SerializedName
