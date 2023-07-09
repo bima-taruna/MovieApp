@@ -11,6 +11,6 @@ interface ApiService {
 
     @GET("movie/{movieId}")
     suspend fun getMovieById(
-        @Path("movieId") movieId:String
+        @Path("movieId") movieId:Int
     ) : MovieResponse
 }
