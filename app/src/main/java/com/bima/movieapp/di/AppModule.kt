@@ -66,7 +66,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(apiService: ApiService): MovieRepository {
+   fun provideMovieRepository(apiService: ApiService): MovieRepository {
         return MovieRepositoryImpl(apiService)
     }
 }
