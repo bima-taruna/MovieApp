@@ -17,16 +17,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.bima.movieapp.R
 import com.bima.movieapp.presentation.theme.MovieAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MovieAppTheme {
-                    Greeting(name = "bima")
-                // A surface container using the 'background' color from the theme
+                 val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = Screen.NowPlayingScreen.route
+                ) {
+                    composable(
+                        route = Screen.NowPlayingScreen.route
+                    ) {
+                        NowPlayingScreen(navController = navController)
+                    }
+                    composable(
+                        route = Screen.MovieDetailScreen.route + "/{movieId}"
+                    ) {
+                        MovieDetailScreen()
+                    }
+                }
             }
         }
     }

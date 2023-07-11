@@ -1,8 +1,11 @@
 package com.bima.movieapp.data.repository
 
+import android.util.Log
 import com.bima.movieapp.common.Resource
+import com.bima.movieapp.data.remote.dto.movieDetailDto.toMovie
+import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
+import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
 import com.bima.movieapp.data.remote.dto.toMovie
-import com.bima.movieapp.data.remote.dto.toNowPlaying
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.NowPlaying
@@ -16,25 +19,29 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : MovieRepository {
-    override suspend fun getNowPlayingMovies(): Flow<Resource<List<NowPlaying>>> = flow {
+    override fun getNowPlayingMovies() : Flow<Resource<List<NowPlaying>>> = flow {
         try {
             emit(Resource.Loading())
-            val nowPlaying = apiService.getNowPlayingMovies().map {it.toNowPlaying()}
+            val nowPlaying = apiService.getNowPlayingMovies().toNowPlaying()
+            Log.d("success", nowPlaying.toString())
             emit(Resource.Success(nowPlaying))
-        } catch (e:HttpException) {
+        } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "error occured"))
-        } catch (e:IOException) {
+        } catch (e: IOException) {
             emit(Resource.Error("couldn't reach server, please check your internet connection" ))
         }
+
     }
 
-    override suspend fun getMovieDetail(movieId: String): Flow<Resource<Movie>> = flow {
+    override fun getMovieDetail(movieId: String): Flow<Resource<Movie>> = flow {
         try {
             emit(Resource.Loading())
             val movie = apiService.getMovieById(movieId).toMovie()
             emit(Resource.Success(movie))
         } catch (e:HttpException) {
+            Log.d("failed", e.localizedMessage ?: "error occured")
             emit(Resource.Error(e.localizedMessage ?: "error occured"))
+
         } catch (e:IOException) {
             emit(Resource.Error("couldn't reach server, please check your internet connection" ))
         }

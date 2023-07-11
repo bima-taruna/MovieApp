@@ -1,16 +1,17 @@
 package com.bima.movieapp.data.remote.retrofit
 
 import com.bima.movieapp.data.remote.dto.MovieResponse
-import com.bima.movieapp.data.remote.dto.NowPlayingResponse
+import com.bima.movieapp.data.remote.dto.movieDetailDto.MovieDetailDto
+import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies() : List<NowPlayingResponse>
+    suspend fun getNowPlayingMovies() : NowPlayingDto
 
-    @GET("movie/{movieId}")
+    @GET("movie/{movie_id}")
     suspend fun getMovieById(
-        @Path("movieId") movieId:Int
-    ) : MovieResponse
+        @Path("movie_id") movieId:String
+    ) : MovieDetailDto
 }

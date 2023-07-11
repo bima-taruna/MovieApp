@@ -33,12 +33,12 @@ object AppModule {
             val url = chain.request()
                 .url
                 .newBuilder()
-                .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
 
             val request = chain.request()
                 .newBuilder()
                 .url(url)
+                .addHeader("Authorization", BuildConfig.API_KEY)
                 .build()
             return@Interceptor chain.proceed(request)
         }
