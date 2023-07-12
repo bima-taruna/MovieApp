@@ -34,7 +34,7 @@ fun MovieDetailScreen(
             Text(text = movie.title, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.background)
             Spacer(modifier = Modifier.padding(16.dp))
             Text(text = movie.overview,
-                textAlign = TextAlign.Center,)
+                textAlign = TextAlign.Center,color = MaterialTheme.colorScheme.background)
         }
     }
 
