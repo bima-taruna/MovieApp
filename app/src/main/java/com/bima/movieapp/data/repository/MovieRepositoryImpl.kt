@@ -5,7 +5,6 @@ import com.bima.movieapp.common.Resource
 import com.bima.movieapp.data.remote.dto.movieDetailDto.toMovie
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
-import com.bima.movieapp.data.remote.dto.toMovie
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.NowPlaying

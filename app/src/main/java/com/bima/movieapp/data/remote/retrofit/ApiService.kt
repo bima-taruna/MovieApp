@@ -1,6 +1,5 @@
 package com.bima.movieapp.data.remote.retrofit
 
-import com.bima.movieapp.data.remote.dto.MovieResponse
 import com.bima.movieapp.data.remote.dto.movieDetailDto.MovieDetailDto
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
 import retrofit2.http.GET

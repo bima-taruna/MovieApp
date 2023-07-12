@@ -1,7 +1,6 @@
 package com.bima.movieapp.data.remote.dto.movieDetailDto
 
 
-import com.bima.movieapp.data.remote.dto.MovieResponse
 import com.bima.movieapp.domain.model.Movie
 import com.google.gson.annotations.SerializedName
 
