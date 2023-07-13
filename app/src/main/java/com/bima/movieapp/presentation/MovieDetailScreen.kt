@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,11 +41,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.domain.model.Movie
-import com.bima.movieapp.presentation.components.ImageBackdrop
-import com.bima.movieapp.presentation.components.ImagePoster
 import com.bima.movieapp.presentation.components.NowPlayingList
 import com.bima.movieapp.viewmodel.MovieDetailViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -53,59 +53,75 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 @Composable
 fun MovieDetailScreen(
+    modifier: Modifier = Modifier,
     viewModel: MovieDetailViewModel = hiltViewModel(),
-) {
+
+    ) {
     val state = viewModel.state.value
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         state.movie?.let { movie ->
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-
+            Column(modifier = modifier.verticalScroll(rememberScrollState())) {
                 ConstraintLayout() {
-                    val (backDrop, poster, title, overview) = createRefs()
-                    val horizontalChain =
-                        createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
+                    val (backDrop, poster, title, genres) = createRefs()
+                    createHorizontalChain(poster,title, chainStyle = ChainStyle.Spread)
                     GlideImage(
                         model = Constant.IMG_URL + movie.backdropPath,
                         contentDescription = "backdrop",
-                        modifier = Modifier
+                        modifier = modifier
                             .fillMaxWidth()
                             .constrainAs(backDrop) {}
                     )
-                    Spacer(modifier = Modifier
-                        .padding(8.dp)
-                        .constrainAs(title) {
-                            top.linkTo(backDrop.bottom)
-                        })
-                    Row(modifier = Modifier.constrainAs(poster) {
-                        start.linkTo(parent.start)
-                        top.linkTo(title.top)
-                        bottom.linkTo(backDrop.bottom)
-                    }) {
-                        GlideImage(
-                            model = Constant.IMG_URL_POSTER + movie.posterPath,
-                            contentDescription = "poster",
-                            modifier = Modifier
-                                .height(150.dp)
-                                .padding(start = 24.dp),
+                    GlideImage(
+                        model = Constant.IMG_URL_POSTER + movie.posterPath,
+                        contentDescription = "poster",
+                        modifier = modifier
+                            .height(150.dp)
+                            .padding(start = 25.dp)
+                            .constrainAs(poster) {
+                                top.linkTo(title.top)
+                                bottom.linkTo(title.bottom)
+                            }
+                    )
 
-                            )
-                        Box(modifier = Modifier.fillMaxHeight()) {
+                    Text(
+                        text = movie.title,
+                        style = MaterialTheme.typography.titleLarge,
+                        maxLines = 4,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier
+                            .width(250.dp)
+                            .padding(top = 16.dp)
+                            .constrainAs(title) {
+                                top.linkTo(backDrop.bottom)
+                            }
+                    )
+                    Row(
+                        modifier = modifier
+                            .constrainAs(genres) {
+                                start.linkTo(title.start)
+                                top.linkTo(title.bottom, margin = 8.dp)
+                                end.linkTo(title.end)
+                            }
+                    ) {
+                        movie.genres.forEachIndexed { index, genre ->
+                            val nextElement = movie.genres.elementAtOrNull(index + 1)
+                            val isNextElementEmpty = nextElement.isNullOrEmpty()
                             Text(
-                                text = movie.title,
-                                style = MaterialTheme.typography.titleLarge,
-                                maxLines = 4,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .padding( start = 8.dp)
-                                    .fillMaxWidth()
-                                    .align(Alignment.BottomCenter),
-                                )
+                                text = genre,
+                                style = MaterialTheme.typography.labelSmall,
+                                modifier = modifier.padding(4.dp)
+                            )
+                            if (!isNextElementEmpty) {
+                                Text(text = "|")
+                            }
                         }
                     }
+
+
                 }
             }
         }
@@ -113,13 +129,13 @@ fun MovieDetailScreen(
             Text(
                 text = state.error,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .align(Alignment.Center)
             )
         }
         if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
         }
 
     }
