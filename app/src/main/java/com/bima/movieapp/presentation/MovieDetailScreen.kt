@@ -80,7 +80,7 @@ fun MovieDetailScreen(
                         contentDescription = "poster",
                         modifier = modifier
                             .height(150.dp)
-                            .padding(start = 25.dp)
+                            .padding(start = 8.dp)
                             .constrainAs(poster) {
                                 top.linkTo(title.top)
                                 bottom.linkTo(title.bottom)
@@ -102,10 +102,11 @@ fun MovieDetailScreen(
                     Row(
                         modifier = modifier
                             .constrainAs(genres) {
-                                start.linkTo(title.start)
+                                start.linkTo(title.start, margin = 8.dp)
                                 top.linkTo(title.bottom, margin = 8.dp)
-                                end.linkTo(title.end)
+                                end.linkTo(title.end, margin = 8.dp)
                             }
+
                     ) {
                         movie.genres.forEachIndexed { index, genre ->
                             val nextElement = movie.genres.elementAtOrNull(index + 1)
