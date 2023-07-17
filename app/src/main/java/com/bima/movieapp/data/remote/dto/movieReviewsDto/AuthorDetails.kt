@@ -7,9 +7,9 @@ data class AuthorDetails(
     @SerializedName("avatar_path")
     val avatarPath: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("rating")
-    val rating: Any,
+    val rating: Int?,
     @SerializedName("username")
-    val username: String
+    val username: String?
 )

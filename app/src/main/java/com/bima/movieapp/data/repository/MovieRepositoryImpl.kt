@@ -48,7 +48,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getReview(movieId: String): Flow<Resource<Reviews>> = flow {
+    override fun getReview(movieId: String): Flow<Resource<List<Reviews>?>> = flow {
         try {
             emit(Resource.Loading())
             val review = apiService.getMovieReviews(movieId).toReviews()
