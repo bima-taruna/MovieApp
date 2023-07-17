@@ -1,9 +1,11 @@
 package com.bima.movieapp.presentation.components.tabs
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -36,9 +38,15 @@ fun ReviewTabs(
     viewModel.savedStateHandle[Constant.PARAM_MOVIE_ID] = movieId
 
     Box(modifier = Modifier.fillMaxHeight()) {
-        LazyColumn(modifier = Modifier) {
-            items(state.Reviews) { review ->
-                ReviewCard(reviews = review)
+        if (state.Reviews.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = "No Reviews yet", Modifier.wrapContentSize())
+            }
+        } else {
+            LazyColumn(modifier = Modifier) {
+                items(state.Reviews) { review ->
+                    ReviewCard(reviews = review)
+                }
             }
         }
         if (state.error.isNotBlank()) {
