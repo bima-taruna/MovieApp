@@ -34,7 +34,7 @@ fun MovieDetailScreen(
         Column() {
             DetailContent(state = state)
             Spacer(modifier = modifier.padding(8.dp))
-            DetailTabs(content = state.movie?.overview.toString())
+            DetailTabs(content = state.movie?.overview.toString(), movieId = state.movie?.id.toString())
         }
         if (state.error.isNotBlank()) {
             Text(

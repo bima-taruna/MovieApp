@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetMovieReviewUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
-    operator fun invoke(movieId:String): Flow<Resource<List<Reviews>>> {
+    operator fun invoke(movieId:String): Flow<Resource<List<Reviews>?>> {
         return repository.getReview(movieId)
     }
 }

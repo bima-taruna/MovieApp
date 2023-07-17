@@ -18,16 +18,16 @@ import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 
 @Composable
-fun DetailTabs(content:String,modifier: Modifier = Modifier) {
+fun DetailTabs(content:String,movieId:String,modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     Column (
-        modifier = modifier.verticalScroll(rememberScrollState())
+        modifier = modifier
     ) {
         TabRow(
             selectedTabIndex = pagerState.currentPage,
         ) {
-            tabsItem(content).forEachIndexed { index, item ->
+            tabsItem(content, movieId).forEachIndexed { index, item ->
                 Tab(
                     selected = index == pagerState.currentPage,
                     text = { Text(text = item.title) },
@@ -36,10 +36,10 @@ fun DetailTabs(content:String,modifier: Modifier = Modifier) {
             }
         }
         HorizontalPager(
-            pageCount = tabsItem(content).size,
+            pageCount = tabsItem(content, movieId).size,
             state = pagerState
         ) {
-            tabsItem(content)[pagerState.currentPage].screen()
+            tabsItem(content, movieId)[pagerState.currentPage].screen()
         }
     }
 }
