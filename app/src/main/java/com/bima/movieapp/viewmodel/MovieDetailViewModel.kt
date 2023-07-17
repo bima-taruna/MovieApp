@@ -25,7 +25,7 @@ class MovieDetailViewModel @Inject constructor(
 
     init {
 
-           savedStateHandle.get<String>(Constant.PARAM_COIN_ID)?.let { movieId->
+           savedStateHandle.get<String>(Constant.PARAM_MOVIE_ID)?.let { movieId->
                getMovieDetail(movieId)
            }
 

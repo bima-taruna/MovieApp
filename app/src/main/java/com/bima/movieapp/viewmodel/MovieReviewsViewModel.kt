@@ -3,8 +3,10 @@ package com.bima.movieapp.viewmodel
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.domain.use_case.getReview.GetMovieReviewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,10 +16,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieReviewsViewModel @Inject constructor(
-    private val getMovieReviewUseCase: GetMovieReviewUseCase
+    private val getMovieReviewUseCase: GetMovieReviewUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = mutableStateOf(MovieReviewsState())
     val state: State<MovieReviewsState> = _state
+
+    init {
+        savedStateHandle.get<String>(Constant.PARAM_MOVIE_ID)?.let { movieId->
+            getMovieReview(movieId)
+        }
+    }
 
     private fun getMovieReview(movieId:String) {
         getMovieReviewUseCase(movieId).onEach { result->
