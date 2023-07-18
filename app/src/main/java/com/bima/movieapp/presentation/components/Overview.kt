@@ -23,6 +23,7 @@ fun Overview(content:String) {
             text = content,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(
                 horizontal = 16.dp,
                 vertical = 8.dp)

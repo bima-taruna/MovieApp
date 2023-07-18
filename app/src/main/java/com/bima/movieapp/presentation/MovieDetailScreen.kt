@@ -29,17 +29,17 @@ fun MovieDetailScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+
     ) {
         Column() {
             DetailContent(state = state)
-            Spacer(modifier = modifier.padding(8.dp))
+            Spacer(modifier = modifier.padding(16.dp))
             DetailTabs(content = state.movie?.overview.toString(), movieId = state.movie?.id.toString())
         }
         if (state.error.isNotBlank()) {
             Text(
                 text = state.error,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Justify,
                 modifier = modifier
                     .fillMaxWidth()
                     .align(Alignment.Center)

@@ -72,6 +72,7 @@ fun DetailContent(
                 Text(
                     text = movie.title,
                     style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 4,
                     textAlign = TextAlign.Center,
                     modifier = modifier
@@ -96,6 +97,7 @@ fun DetailContent(
                         Text(
                             text = genre,
                             style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = modifier.padding(4.dp)
                         )
                         if (!isNextElementEmpty) {

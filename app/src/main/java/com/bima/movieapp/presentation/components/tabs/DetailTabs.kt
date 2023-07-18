@@ -9,6 +9,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -30,7 +31,7 @@ fun DetailTabs(content:String,movieId:String,modifier: Modifier = Modifier) {
             tabsItem(content, movieId).forEachIndexed { index, item ->
                 Tab(
                     selected = index == pagerState.currentPage,
-                    text = { Text(text = item.title) },
+                    text = { Text(text = item.title, style = MaterialTheme.typography.titleMedium) },
                     onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                 )
             }
