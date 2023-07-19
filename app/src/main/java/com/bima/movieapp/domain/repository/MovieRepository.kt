@@ -2,6 +2,7 @@ package com.bima.movieapp.domain.repository
 
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
+import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.NowPlaying
 import com.bima.movieapp.domain.model.Reviews
@@ -13,4 +14,6 @@ interface MovieRepository {
     fun getMovieDetail(movieId: String): Flow<Resource<Movie>>
 
     fun getReview(movieId: String) : Flow<Resource<List<Reviews>?>>
+
+    fun getMovieCast(movieId:String) : Flow<Resource<List<Cast>>>
 }
