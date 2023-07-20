@@ -15,7 +15,7 @@ fun tabsItem(content:String, movieId:String): List<TabItem> {
         ),
         TabItem(
             title = "Cast",
-            screen = { Overview(content = content) }
+            screen = { CastTabs( movieId = movieId) }
         )
     )
 }

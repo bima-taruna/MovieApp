@@ -9,10 +9,12 @@ import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.domain.use_case.get_movie_cast.GetMovieCastUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+@HiltViewModel
 class MovieCastViewModel @Inject constructor(
     private val getMovieCastUseCase: GetMovieCastUseCase,
     val savedStateHandle: SavedStateHandle
@@ -31,7 +33,6 @@ class MovieCastViewModel @Inject constructor(
             when(result) {
                 is Resource.Success -> {
                     _state.value = MovieCastState(cast = result.data ?: emptyList())
-
                 }
                 is Resource.Error -> {
                     _state.value = MovieCastState(error = result.message ?:

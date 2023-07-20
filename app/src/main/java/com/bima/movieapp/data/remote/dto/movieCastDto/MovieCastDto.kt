@@ -1,26 +1,24 @@
 package com.bima.movieapp.data.remote.dto.movieCastDto
 
 
-import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
-import com.bima.movieapp.domain.model.NowPlaying
-import com.google.gson.annotations.SerializedName
 import com.bima.movieapp.domain.model.Cast
+import com.google.gson.annotations.SerializedName
 
 data class MovieCastDto(
     @SerializedName("cast")
-    val cast: List<Cast>,
+    val cast: List<CastDto?>?,
     @SerializedName("crew")
-    val crew: List<Crew>,
+    val crew: List<Crew?>?,
     @SerializedName("id")
-    val id: Int
+    val id: Int?
 )
 
-fun MovieCastDto.toCast() : List<Cast> {
-    return cast.map {
+fun MovieCastDto.toCast() : List<com.bima.movieapp.domain.model.Cast>? {
+    return cast?.map {
         Cast(
-            name = it.name,
-            character = it.character,
-            profilePath = it.profilePath
+            name = it?.name,
+            profilePath = it?.profilePath,
+            character = it?.character,
         )
     }
 }

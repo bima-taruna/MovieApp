@@ -2,13 +2,12 @@ package com.bima.movieapp.data.repository
 
 import android.util.Log
 import com.bima.movieapp.common.Resource
+import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.data.remote.dto.movieCastDto.toCast
 import com.bima.movieapp.data.remote.dto.movieDetailDto.toMovie
 import com.bima.movieapp.data.remote.dto.movieReviewsDto.toReviews
-import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
 import com.bima.movieapp.data.remote.retrofit.ApiService
-import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.NowPlaying
 import com.bima.movieapp.domain.model.Reviews
@@ -63,7 +62,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieCast(movieId: String): Flow<Resource<List<Cast>>> = flow {
+    override fun getMovieCast(movieId: String): Flow<Resource<List<Cast>?>> = flow {
         try {
             emit(Resource.Loading())
             val cast = apiService.getMovieCast(movieId).toCast()

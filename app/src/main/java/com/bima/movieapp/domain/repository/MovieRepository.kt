@@ -15,5 +15,5 @@ interface MovieRepository {
 
     fun getReview(movieId: String) : Flow<Resource<List<Reviews>?>>
 
-    fun getMovieCast(movieId:String) : Flow<Resource<List<Cast>>>
+    fun getMovieCast(movieId:String) : Flow<Resource<List<Cast>?>>
 }

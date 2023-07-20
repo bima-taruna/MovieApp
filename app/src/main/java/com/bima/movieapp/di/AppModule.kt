@@ -38,6 +38,7 @@ object AppModule {
             val request = chain.request()
                 .newBuilder()
                 .url(url)
+                .addHeader("accept", "application/json")
                 .addHeader("Authorization", BuildConfig.API_KEY)
                 .build()
             return@Interceptor chain.proceed(request)
