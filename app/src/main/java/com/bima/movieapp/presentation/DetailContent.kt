@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -53,22 +54,24 @@ fun DetailContent(
                         .fillMaxWidth()
                         .constrainAs(backDrop) {},
                 )
-                GlideImage(
-                    imageModel = { Constant.IMG_URL_POSTER + movie.posterPath },
-                    imageOptions = ImageOptions(
-                        contentScale = ContentScale.Fit
-                    ),
-                    loading = {
-                        ImageLoading()
-                    },
-                    modifier = modifier
-                        .height(150.dp)
-                        .padding(start = 8.dp)
-                        .constrainAs(poster) {
-                            top.linkTo(title.top)
-                            bottom.linkTo(title.bottom)
-                        }
-                )
+                Card(modifier = modifier.height(150.dp)
+                    .padding(start = 8.dp)
+                    .constrainAs(poster) {
+                        top.linkTo(title.top)
+                        bottom.linkTo(title.bottom)
+                    }) {
+
+                    GlideImage(
+                        imageModel = { Constant.IMG_URL_POSTER + movie.posterPath },
+                        imageOptions = ImageOptions(
+                            contentScale = ContentScale.Fit
+                        ),
+                        loading = {
+                            ImageLoading()
+                        },
+                        modifier = modifier
+                    )
+                }
                 Text(
                     text = movie.title,
                     style = MaterialTheme.typography.titleLarge,

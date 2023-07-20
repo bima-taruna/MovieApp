@@ -1,6 +1,7 @@
 package com.bima.movieapp.presentation.components
 
 import android.graphics.drawable.VectorDrawable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.bima.movieapp.R
@@ -39,20 +41,18 @@ fun ReviewCard(
 ) {
    ElevatedCard(
        elevation = CardDefaults.cardElevation(),
-       colors = CardDefaults.cardColors(
-           containerColor = MaterialTheme.colorScheme.tertiaryContainer
-       ),
+       colors = CardDefaults.cardColors(),
        shape = CardDefaults.shape,
        modifier = Modifier.padding(16.dp)
    ) {
        Column(modifier = Modifier.padding(16.dp)) {
            Row() {
-               if(reviews.avatar_path.isNullOrEmpty()) {
-                   Icon(
-                       imageVector = ImageVector.vectorResource(
-                           id = R.drawable.baseline_account_circle_24),
-                       contentDescription = "reviewer profile pic",
-                       modifier = Modifier.size(60.dp)
+               if(reviews.avatar_path == null) {
+                   Image(painter = painterResource(id = R.drawable.user),
+                       contentDescription = "default icon",
+                       modifier = Modifier
+                           .clip(CircleShape)
+                           .size(60.dp)
                    )
                } else {
                    GlideImage(
