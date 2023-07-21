@@ -37,7 +37,7 @@ fun DetailContent(
 ) {
     state.movie?.let { movie ->
         Column(modifier = modifier
-            .fillMaxHeight(0.55f)
+            .fillMaxHeight(0.5f)
             ) {
             ConstraintLayout() {
                 val (backDrop, poster, title, genres) = createRefs()
