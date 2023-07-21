@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bima.movieapp.presentation.components.NowPlayingList
+import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.NowPlayingViewModel
 
 @Composable
