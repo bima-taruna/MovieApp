@@ -1,5 +1,7 @@
 package com.bima.movieapp.presentation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,9 +38,11 @@ fun DetailContent(
     state: MovieDetailState,
 ) {
     state.movie?.let { movie ->
-        Column(modifier = modifier
-            .fillMaxHeight(0.5f)
-            ) {
+        val genresString = movie.genres.joinToString(separator = " | ")
+        Column(
+            modifier = modifier
+                .fillMaxHeight(0.45f)
+        ) {
             ConstraintLayout() {
                 val (backDrop, poster, title, genres) = createRefs()
                 createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
@@ -56,7 +60,8 @@ fun DetailContent(
                 )
                 Card(modifier = modifier
                     .height(150.dp)
-                    .padding(start = 8.dp)
+                    .fillMaxWidth(0.3f)
+                    .padding(start = 16.dp)
                     .constrainAs(poster) {
                         top.linkTo(title.top)
                         bottom.linkTo(title.bottom)
@@ -65,7 +70,7 @@ fun DetailContent(
                     GlideImage(
                         imageModel = { Constant.IMG_URL_POSTER + movie.posterPath },
                         imageOptions = ImageOptions(
-                            contentScale = ContentScale.Fit
+                            contentScale = ContentScale.Crop
                         ),
                         loading = {
                             ImageLoading()
@@ -86,30 +91,24 @@ fun DetailContent(
                             top.linkTo(backDrop.bottom)
                         }
                 )
-                Row(
+                Text(
+                    text = genresString,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
                     modifier = modifier
+                        .padding(horizontal = 8.dp)
                         .constrainAs(genres) {
                             start.linkTo(title.start, margin = 8.dp)
                             top.linkTo(title.bottom, margin = 8.dp)
                             end.linkTo(title.end, margin = 8.dp)
-                        }
+                        }.fillMaxWidth(0.7f)
+                )
 
-                ) {
-                    movie.genres.forEachIndexed { index, genre ->
-                        val nextElement = movie.genres.elementAtOrNull(index + 1)
-                        val isNextElementEmpty = nextElement.isNullOrEmpty()
-                        Text(
-                            text = genre,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = modifier.padding(4.dp)
-                        )
-                        if (!isNextElementEmpty) {
-                            Text(text = "|")
-                        }
-                    }
-                }
+
             }
         }
+
+
     }
 }

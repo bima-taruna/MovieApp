@@ -22,7 +22,7 @@ import com.bima.movieapp.presentation.navigation.Screen
 
 @Composable
 fun HomeScreen(
-
+    modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
     val bottomNavigationItems = listOf(
@@ -32,28 +32,22 @@ fun HomeScreen(
     )
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    Log.d("state", bottomBarState.toString())
-    Log.d("route", navBackStackEntry?.destination?.route.toString())
-
 
     when (navBackStackEntry?.destination?.route) {
         "now_playing_screen" -> {
-            // Show BottomBar
             bottomBarState.value = true
         }
         "movie_search_screen" -> {
-            // Show BottomBar
             bottomBarState.value = true
         }
         "movie_favorite_screen" -> {
-            // Show BottomBar
             bottomBarState.value = true
         }
         "movie_detail_screen/{movieId}" -> {
-            // Hide BottomBar
             bottomBarState.value = false
         }
     }
+
     Scaffold(
         bottomBar = {
             AnimatedVisibility(
@@ -65,7 +59,7 @@ fun HomeScreen(
             }
         },
         content = { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)){
+            Box(modifier = modifier.padding(innerPadding)){
                 Navigation(navController = navController)
             }
         }
