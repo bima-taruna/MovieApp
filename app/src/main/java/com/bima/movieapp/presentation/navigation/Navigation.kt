@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bima.movieapp.presentation.FavoriteScreen
+import com.bima.movieapp.presentation.HomeScreen
 import com.bima.movieapp.presentation.MovieDetailScreen
 import com.bima.movieapp.presentation.NowPlayingScreen
 import com.bima.movieapp.presentation.SearchScreen
@@ -15,7 +16,6 @@ import com.bima.movieapp.presentation.SearchScreen
 fun Navigation(
     navController: NavHostController
 ) {
-
     NavHost(
         navController = navController,
         startDestination = Screen.NowPlayingScreen.route
@@ -23,7 +23,7 @@ fun Navigation(
         composable(
             route = Screen.NowPlayingScreen.route
         ) {
-            NowPlayingScreen(navController = navController)
+           HomeScreen()
         }
         composable(
             route = Screen.MovieDetailScreen.route + "/{movieId}"

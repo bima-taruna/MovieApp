@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.ui.unit.dp
-import com.bima.movieapp.presentation.navigation.Navigation
 import com.bima.movieapp.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
            AppTheme {
                Surface(color = MaterialTheme.colorScheme.background) {
-                    HomeScreen()
+                    MovieApp()
                }
             }
         }
