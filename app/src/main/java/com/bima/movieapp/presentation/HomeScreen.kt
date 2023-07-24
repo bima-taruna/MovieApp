@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.bima.movieapp.presentation.components.ImageSwipe
+import com.bima.movieapp.presentation.components.PopularMovie
 
 @Composable
 fun HomeScreen(
@@ -19,5 +20,6 @@ fun HomeScreen(
             .verticalScroll(rememberScrollState())
     ) {
         ImageSwipe(navController = navController)
+        PopularMovie()
     }
 }

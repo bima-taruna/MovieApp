@@ -90,7 +90,7 @@ fun ImageSwipe(
                 }
                 Text(
                     text = state.nowPlaying[index].title.toString(),
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.headlineSmall,
                     color = Color.White,
                     modifier = modifier
                         .padding(horizontal = 16.dp)
