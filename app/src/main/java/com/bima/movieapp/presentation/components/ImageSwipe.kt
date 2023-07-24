@@ -4,6 +4,8 @@ package com.bima.movieapp.presentation.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,11 +20,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.bima.movieapp.common.Constant
+import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.NowPlayingViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -31,6 +37,7 @@ import com.skydoves.landscapist.glide.GlideImage
 fun ImageSwipe(
     modifier: Modifier = Modifier,
     viewModel: NowPlayingViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val state = viewModel.state.value
     val pagerState = rememberPagerState()
@@ -58,7 +65,7 @@ fun ImageSwipe(
                 Text(
                     text = state.nowPlaying[index].title.toString(),
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.background,
+                    color = Color.White,
                     modifier = modifier.constrainAs(title) {
                         start.linkTo(spacer.start)
 
@@ -71,21 +78,35 @@ fun ImageSwipe(
                     bottom.linkTo(backDrop.bottom)
                 })
                 Row(modifier = modifier
-                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.6f))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.background
+                            )
+                        )
+                    )
                     .padding(16.dp)
                     .fillMaxWidth()
+
                     .constrainAs(buttonRow) {
                         start.linkTo(spacer.start)
                         end.linkTo(spacer.end)
                         top.linkTo(spacer.bottom)
                         bottom.linkTo(backDrop.bottom)
-                    }
+                    },
                 ) {
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(
+                        modifier = modifier.weight(1f).padding(8.dp),
+                        onClick = { /*TODO*/ }) {
                         Text(text = "add to wishlist")
                     }
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "detail")
+                    Button(
+                        modifier = modifier.weight(1f).padding(8.dp)
+                        ,onClick = {
+                        navController.navigate(Screen.MovieDetailScreen.route + "/${state.nowPlaying[index].id}")
+                    }) {
+                        Text(text = "Detail")
                     }
                 }
             }

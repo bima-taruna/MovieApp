@@ -41,7 +41,7 @@ fun DetailContent(
         val genresString = movie.genres.joinToString(separator = " | ")
         Column(
             modifier = modifier
-                .fillMaxHeight(0.45f)
+                .fillMaxHeight(0.50f)
         ) {
             ConstraintLayout() {
                 val (backDrop, poster, title, genres) = createRefs()
