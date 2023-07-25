@@ -21,7 +21,7 @@ fun NowPlayingList(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onItemClick(nowPlaying) }
-            .padding(20.dp),
+            .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(nowPlaying.title!!, style = MaterialTheme.typography.bodyMedium)

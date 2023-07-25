@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -70,8 +71,7 @@ fun ImageSwipe(
                             imageOptions = ImageOptions(
                                 contentScale = ContentScale.Fit,
                                 contentDescription = state.nowPlaying[index].title + " image"
-                            ),
-
+                                ),
                             )
                         Box(
                             modifier = modifier
@@ -95,9 +95,9 @@ fun ImageSwipe(
                     modifier = modifier
                         .padding(horizontal = 16.dp)
                         .constrainAs(title) {
-                        start.linkTo(spacer.start)
-                        bottom.linkTo(spacer.top)
-                    }
+                            start.linkTo(spacer.start)
+                            bottom.linkTo(spacer.top)
+                        }
                 )
                 Spacer(modifier = modifier
                     .fillMaxWidth()
@@ -127,24 +127,13 @@ fun ImageSwipe(
                             bottom.linkTo(backDrop.bottom)
                         },
                 ) {
-                    Button(
-                        modifier = modifier
-                            .weight(1f)
-                            .padding(8.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        onClick = { /*TODO*/ }) {
-                        Text(text = "add to wishlist")
-                    }
-                    Button(
-                        modifier = modifier
-                            .weight(1f)
-                            .padding(8.dp),
-                        shape = RoundedCornerShape(8.dp),
+                    BigButton(buttonText = "Add to Wishlist", onClick = {}, modifier = modifier.weight(1f))
+                    BigButton(
+                        buttonText = "Detail",
+                        modifier = modifier.weight(1f),
                         onClick = {
-                            navController.navigate(Screen.MovieDetailScreen.route + "/${state.nowPlaying[index].id}")
-                        }) {
-                        Text(text = "Detail")
-                    }
+                        navController.navigate(Screen.MovieDetailScreen.route + "/${state.nowPlaying[index].id}")
+                    })
                 }
             }
         }

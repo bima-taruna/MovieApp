@@ -26,22 +26,7 @@ fun PopularMovie(
 ) {
     val state = viewModel.state.value
     Column {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-            ,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Popular",
-                style = MaterialTheme.typography.titleLarge
-            )
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(text = "see more")
-            }
-        }
+        SeeMore(title = "Now Playing")
         Spacer(modifier = modifier.padding(8.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp)

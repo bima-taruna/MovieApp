@@ -44,7 +44,7 @@ fun PopularList(
                 )
             )
         }
-        Spacer(modifier = modifier.padding(8.dp))
+        Spacer(modifier = modifier.padding(4.dp))
         Text(
             text = nowPlaying.title.toString(),
             style = MaterialTheme.typography.titleSmall,
