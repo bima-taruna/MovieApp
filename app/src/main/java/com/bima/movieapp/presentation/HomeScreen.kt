@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import com.bima.movieapp.presentation.components.ImageSwipe
 import com.bima.movieapp.presentation.components.PopularMovie
 import com.bima.movieapp.presentation.components.TopRatedMovie
+import com.bima.movieapp.presentation.components.UpcomingMovies
 
 @Composable
 fun HomeScreen(
@@ -23,5 +24,6 @@ fun HomeScreen(
         ImageSwipe(navController = navController)
         PopularMovie(navController = navController)
         TopRatedMovie(navController = navController)
+        UpcomingMovies(navController = navController)
     }
 }
