@@ -11,22 +11,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.viewmodel.NowPlayingViewModel
+import com.bima.movieapp.viewmodel.TopRatedViewModel
 
 @Composable
-fun PopularMovie(
+fun TopRatedMovie(
     modifier: Modifier = Modifier,
-    viewModel: NowPlayingViewModel = hiltViewModel(),
+    viewModel: TopRatedViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
     Column {
-        SeeMore(title = "Now Playing")
+        SeeMore(title = "Top Rated")
         Spacer(modifier = modifier.padding(8.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
-           items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
-               MoviesList(movieList = movie)
-           }
+            items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
+                MoviesList(movieList = movie)
+            }
         }
     }
 }

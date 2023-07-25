@@ -20,7 +20,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun PopularList(
+fun MoviesList(
     movieList: MovieList,
     modifier: Modifier = Modifier
 ) {
