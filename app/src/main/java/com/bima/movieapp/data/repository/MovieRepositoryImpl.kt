@@ -6,7 +6,7 @@ import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.data.remote.dto.movieCastDto.toCast
 import com.bima.movieapp.data.remote.dto.movieDetailDto.toMovie
 import com.bima.movieapp.data.remote.dto.movieReviewsDto.toReviews
-import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
+import com.bima.movieapp.data.remote.dto.movieListDto.toMovieList
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.MovieList
@@ -24,7 +24,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val nowPlaying = apiService.getNowPlayingMovies(type = "now_playing").toNowPlaying()
+            val nowPlaying = apiService.getMovies(type = "now_playing").toMovieList()
             Log.d("success", nowPlaying.toString())
             emit(Resource.Success(nowPlaying))
         } catch (e: HttpException) {
@@ -38,9 +38,22 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getPopularMovies(): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val nowPlaying = apiService.getNowPlayingMovies(type = "popular").toNowPlaying()
-            Log.d("success", nowPlaying.toString())
-            emit(Resource.Success(nowPlaying))
+            val popular = apiService.getMovies(type = "popular").toMovieList()
+            Log.d("success", popular.toString())
+            emit(Resource.Success(popular))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.localizedMessage ?: "error occured"))
+        } catch (e: IOException) {
+            emit(Resource.Error("couldn't reach server, please check your internet connection" ))
+        }
+    }
+
+    override fun getTopRatedMovies(): Flow<Resource<List<MovieList>>> = flow {
+        try {
+            emit(Resource.Loading())
+            val topRated = apiService.getMovies(type = "top_rated").toMovieList()
+            Log.d("success", topRated.toString())
+            emit(Resource.Success(topRated))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "error occured"))
         } catch (e: IOException) {

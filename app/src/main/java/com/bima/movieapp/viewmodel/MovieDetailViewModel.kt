@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.domain.use_case.get_movie.GetMovieUseCase
+import com.bima.movieapp.viewmodel.state.MovieDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

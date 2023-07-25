@@ -1,4 +1,4 @@
-package com.bima.movieapp.data.remote.dto.nowPlayingDto
+package com.bima.movieapp.data.remote.dto.movieListDto
 
 
 import com.bima.movieapp.domain.model.MovieList
@@ -17,7 +17,7 @@ data class MovieListDto(
     val totalResults: Int
 )
 
-fun MovieListDto.toNowPlaying() : List<MovieList> {
+fun MovieListDto.toMovieList() : List<MovieList> {
     return results.map {
         MovieList(
             id = it.id,

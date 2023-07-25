@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Resource
-import com.bima.movieapp.domain.use_case.get_popular.GetPopularUseCase
+import com.bima.movieapp.domain.use_case.getTopRated.GetTopRatedUseCase
 import com.bima.movieapp.viewmodel.state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -14,16 +14,16 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class PopularViewModel @Inject constructor(
-    private val getPopularUseCase: GetPopularUseCase
+class TopRatedViewModel @Inject constructor(
+    private val getTopRatedUseCase: GetTopRatedUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(MoviesState())
     val state: State<MoviesState> = _state
     init {
-        getPopular()
+        getTopRated()
     }
-    private fun getPopular() {
-            getPopularUseCase().onEach { result ->
+    private fun getTopRated() {
+            getTopRatedUseCase().onEach { result ->
                 when(result) {
                     is Resource.Success -> {
                         _state.value = MoviesState(movieList = result.data ?: emptyList())

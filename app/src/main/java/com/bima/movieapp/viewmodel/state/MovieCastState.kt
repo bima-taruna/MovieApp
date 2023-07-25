@@ -1,4 +1,4 @@
-package com.bima.movieapp.viewmodel
+package com.bima.movieapp.viewmodel.state
 
 import com.bima.movieapp.domain.model.Cast
 

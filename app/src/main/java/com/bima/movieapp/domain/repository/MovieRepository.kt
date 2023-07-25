@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface MovieRepository {
     fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>>
     fun getPopularMovies() : Flow<Resource<List<MovieList>>>
+    fun getTopRatedMovies() : Flow<Resource<List<MovieList>>>
 
     fun getMovieDetail(movieId: String): Flow<Resource<Movie>>
 

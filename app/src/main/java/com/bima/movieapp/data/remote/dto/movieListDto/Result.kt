@@ -1,4 +1,4 @@
-package com.bima.movieapp.data.remote.dto.nowPlayingDto
+package com.bima.movieapp.data.remote.dto.movieListDto
 
 
 import com.google.gson.annotations.SerializedName

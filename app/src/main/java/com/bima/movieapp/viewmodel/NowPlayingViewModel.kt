@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.domain.use_case.get_now_playing.GetNPlayingUseCase
+import com.bima.movieapp.viewmodel.state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,8 +17,8 @@ import javax.inject.Inject
 class NowPlayingViewModel @Inject constructor(
     private val getNPlayingUseCase: GetNPlayingUseCase
 ) : ViewModel() {
-    private val _state = mutableStateOf(NowPlayingState())
-    val state: State<NowPlayingState> = _state
+    private val _state = mutableStateOf(MoviesState())
+    val state: State<MoviesState> = _state
 
     init {
         getNowPlaying()
@@ -27,16 +28,16 @@ class NowPlayingViewModel @Inject constructor(
             getNPlayingUseCase().onEach { result ->
                 when(result) {
                     is Resource.Success -> {
-                        _state.value = NowPlayingState(movieList = result.data ?: emptyList())
+                        _state.value = MoviesState(movieList = result.data ?: emptyList())
 
                     }
                     is Resource.Error -> {
-                        _state.value = NowPlayingState(error = result.message ?:
+                        _state.value = MoviesState(error = result.message ?:
                         "An unexpected error occurred")
                         Log.d("test", result.message.toString())
                     }
                     is Resource.Loading -> {
-                        _state.value = NowPlayingState(isLoading = true)
+                        _state.value = MoviesState(isLoading = true)
                     }
                 }
 
