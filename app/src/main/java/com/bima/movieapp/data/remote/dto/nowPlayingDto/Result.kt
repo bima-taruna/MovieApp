@@ -1,7 +1,6 @@
 package com.bima.movieapp.data.remote.dto.nowPlayingDto
 
 
-import com.bima.movieapp.domain.model.NowPlaying
 import com.google.gson.annotations.SerializedName
 
 data class Result(

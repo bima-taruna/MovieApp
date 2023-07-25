@@ -1,19 +1,12 @@
 package com.bima.movieapp.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,8 +24,8 @@ fun PopularMovie(
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-           items(state.nowPlaying.subList(0, state.nowPlaying.size / 2)) { movie->
-               PopularList(nowPlaying = movie)
+           items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
+               PopularList(movieList = movie)
            }
         }
     }

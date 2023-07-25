@@ -1,6 +1,6 @@
 package com.bima.movieapp.domain.model
 
-data class NowPlaying(
+data class MovieList(
     val id: Int?,
     val title: String?,
     val posterPath: String?,

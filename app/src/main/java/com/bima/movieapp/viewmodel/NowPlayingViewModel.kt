@@ -6,12 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Resource
-import com.bima.movieapp.domain.repository.MovieRepository
 import com.bima.movieapp.domain.use_case.get_now_playing.GetNPlayingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +27,7 @@ class NowPlayingViewModel @Inject constructor(
             getNPlayingUseCase().onEach { result ->
                 when(result) {
                     is Resource.Success -> {
-                        _state.value = NowPlayingState(nowPlaying = result.data ?: emptyList())
+                        _state.value = NowPlayingState(movieList = result.data ?: emptyList())
 
                     }
                     is Resource.Error -> {

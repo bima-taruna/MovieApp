@@ -10,21 +10,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bima.movieapp.domain.model.NowPlaying
+import com.bima.movieapp.domain.model.MovieList
 
 @Composable
 fun NowPlayingList(
-    nowPlaying: NowPlaying,
-    onItemClick: (NowPlaying) -> Unit
+    movieList: MovieList,
+    onItemClick: (MovieList) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClick(nowPlaying) }
+            .clickable { onItemClick(movieList) }
             .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(nowPlaying.title!!, style = MaterialTheme.typography.bodyMedium)
-        Text(nowPlaying.voteAverage.toString(), style = MaterialTheme.typography.bodyMedium)
+        Text(movieList.title!!, style = MaterialTheme.typography.bodyMedium)
+        Text(movieList.voteAverage.toString(), style = MaterialTheme.typography.bodyMedium)
     }
 }

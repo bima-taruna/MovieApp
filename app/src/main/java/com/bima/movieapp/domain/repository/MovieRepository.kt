@@ -1,16 +1,15 @@
 package com.bima.movieapp.domain.repository
 
 import com.bima.movieapp.common.Resource
-import com.bima.movieapp.data.remote.dto.nowPlayingDto.NowPlayingDto
 import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.domain.model.Movie
-import com.bima.movieapp.domain.model.NowPlaying
+import com.bima.movieapp.domain.model.MovieList
 import com.bima.movieapp.domain.model.Reviews
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    fun getNowPlayingMovies() : Flow<Resource<List<NowPlaying>>>
-    fun getPopularMovies() : Flow<Resource<List<NowPlaying>>>
+    fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>>
+    fun getPopularMovies() : Flow<Resource<List<MovieList>>>
 
     fun getMovieDetail(movieId: String): Flow<Resource<Movie>>
 

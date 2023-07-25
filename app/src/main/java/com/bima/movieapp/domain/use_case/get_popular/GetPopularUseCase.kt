@@ -1,20 +1,15 @@
 package com.bima.movieapp.domain.use_case.get_popular
 
-import android.util.Log
 import com.bima.movieapp.common.Resource
-import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
-import com.bima.movieapp.domain.model.NowPlaying
+import com.bima.movieapp.domain.model.MovieList
 import com.bima.movieapp.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class GetPopularUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
-   operator fun invoke(): Flow<Resource<List<NowPlaying>>>  {
+   operator fun invoke(): Flow<Resource<List<MovieList>>>  {
         return repository.getPopularMovies()
     }
 }

@@ -9,7 +9,7 @@ import com.bima.movieapp.data.remote.dto.movieReviewsDto.toReviews
 import com.bima.movieapp.data.remote.dto.nowPlayingDto.toNowPlaying
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.domain.model.Movie
-import com.bima.movieapp.domain.model.NowPlaying
+import com.bima.movieapp.domain.model.MovieList
 import com.bima.movieapp.domain.model.Reviews
 import com.bima.movieapp.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : MovieRepository {
-    override fun getNowPlayingMovies() : Flow<Resource<List<NowPlaying>>> = flow {
+    override fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
             val nowPlaying = apiService.getNowPlayingMovies(type = "now_playing").toNowPlaying()
@@ -35,7 +35,7 @@ class MovieRepositoryImpl @Inject constructor(
 
     }
 
-    override fun getPopularMovies(): Flow<Resource<List<NowPlaying>>> = flow {
+    override fun getPopularMovies(): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
             val nowPlaying = apiService.getNowPlayingMovies(type = "popular").toNowPlaying()

@@ -27,7 +27,7 @@ class PopularViewModel @Inject constructor(
             getPopularUseCase().onEach { result ->
                 when(result) {
                     is Resource.Success -> {
-                        _state.value = NowPlayingState(nowPlaying = result.data ?: emptyList())
+                        _state.value = NowPlayingState(movieList = result.data ?: emptyList())
 
                     }
                     is Resource.Error -> {

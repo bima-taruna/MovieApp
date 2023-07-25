@@ -1,10 +1,10 @@
 package com.bima.movieapp.data.remote.dto.nowPlayingDto
 
 
-import com.bima.movieapp.domain.model.NowPlaying
+import com.bima.movieapp.domain.model.MovieList
 import com.google.gson.annotations.SerializedName
 
-data class NowPlayingDto(
+data class MovieListDto(
     @SerializedName("dates")
     val dates: Dates,
     @SerializedName("page")
@@ -17,9 +17,9 @@ data class NowPlayingDto(
     val totalResults: Int
 )
 
-fun NowPlayingDto.toNowPlaying() : List<NowPlaying> {
+fun MovieListDto.toNowPlaying() : List<MovieList> {
     return results.map {
-        NowPlaying(
+        MovieList(
             id = it.id,
             title = it.title,
             backdropPath = it.backdropPath,
