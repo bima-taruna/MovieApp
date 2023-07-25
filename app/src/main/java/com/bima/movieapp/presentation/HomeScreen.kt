@@ -21,7 +21,7 @@ fun HomeScreen(
             .verticalScroll(rememberScrollState())
     ) {
         ImageSwipe(navController = navController)
-        PopularMovie()
-        TopRatedMovie()
+        PopularMovie(navController = navController)
+        TopRatedMovie(navController = navController)
     }
 }

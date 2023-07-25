@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.NowPlayingViewModel
 import com.bima.movieapp.viewmodel.TopRatedViewModel
 
@@ -17,6 +19,7 @@ import com.bima.movieapp.viewmodel.TopRatedViewModel
 fun TopRatedMovie(
     modifier: Modifier = Modifier,
     viewModel: TopRatedViewModel = hiltViewModel(),
+    navController: NavController,
 ) {
     val state = viewModel.state.value
     Column {
@@ -26,7 +29,12 @@ fun TopRatedMovie(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
             items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
-                MoviesList(movieList = movie)
+                MoviesList(
+                    movieList = movie,
+                    onClick = {
+                        navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
+                    }
+                )
             }
         }
     }

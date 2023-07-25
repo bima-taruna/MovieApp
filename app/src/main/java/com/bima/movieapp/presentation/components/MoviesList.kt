@@ -1,5 +1,6 @@
 package com.bima.movieapp.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,16 +23,19 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun MoviesList(
     movieList: MovieList,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         Card(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp)
+                .clickable {
+                    onClick()
+                }
         ) {
             GlideImage(
                 imageModel = { Constant.IMG_URL_POSTER + movieList.posterPath },
