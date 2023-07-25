@@ -53,5 +53,6 @@ fun MoviesList(
             modifier = modifier
                 .width(120.dp)
         )
+        Spacer(modifier = modifier.padding(8.dp))
     }
 }

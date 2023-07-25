@@ -61,6 +61,19 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getUpcomingMovies(): Flow<Resource<List<MovieList>>> = flow {
+        try {
+            emit(Resource.Loading())
+            val upcoming = apiService.getMovies(type = "upcoming").toMovieList()
+            Log.d("success", upcoming.toString())
+            emit(Resource.Success(upcoming))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.localizedMessage ?: "error occured"))
+        } catch (e: IOException) {
+            emit(Resource.Error("couldn't reach server, please check your internet connection" ))
+        }
+    }
+
     override fun getMovieDetail(movieId: String): Flow<Resource<Movie>> = flow {
         try {
             emit(Resource.Loading())
