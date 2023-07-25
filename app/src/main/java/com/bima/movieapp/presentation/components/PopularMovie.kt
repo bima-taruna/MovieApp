@@ -31,9 +31,9 @@ fun PopularMovie(
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            items(state.nowPlaying) { movie->
-                PopularList(nowPlaying = movie)
-            }
+           items(state.nowPlaying.subList(0, state.nowPlaying.size / 2)) { movie->
+               PopularList(nowPlaying = movie)
+           }
         }
     }
 }

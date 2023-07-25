@@ -37,13 +37,14 @@ import androidx.navigation.NavController
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.NowPlayingViewModel
+import com.bima.movieapp.viewmodel.PopularViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ImageSwipe(
     modifier: Modifier = Modifier,
-    viewModel: NowPlayingViewModel = hiltViewModel(),
+    viewModel: PopularViewModel = hiltViewModel(),
     navController: NavController,
 ) {
     val state = viewModel.state.value
@@ -117,7 +118,7 @@ fun ImageSwipe(
                                 )
                             )
                         )
-                        .padding(16.dp)
+                        .padding(8.dp)
                         .fillMaxWidth()
 
                         .constrainAs(buttonRow) {

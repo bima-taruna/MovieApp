@@ -8,8 +8,10 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies() : NowPlayingDto
+    @GET("movie/{type}")
+    suspend fun getNowPlayingMovies(
+        @Path("type") type:String
+    ) : NowPlayingDto
 
     @GET("movie/{movie_id}")
     suspend fun getMovieById(

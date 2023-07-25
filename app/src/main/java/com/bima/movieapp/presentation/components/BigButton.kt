@@ -22,6 +22,6 @@ fun BigButton(
         shape = RoundedCornerShape(8.dp),
         onClick = onClick
     ) {
-        Text(text = buttonText, color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold)
+        Text(text = buttonText,  fontWeight = FontWeight.Bold)
     }
 }

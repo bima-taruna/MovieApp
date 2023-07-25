@@ -10,6 +10,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -27,10 +28,11 @@ fun SeeMore(
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold
         )
         TextButton(onClick = { /*TODO*/ }) {
-            Text(text = "See More")
+            Text(text = "See More", fontWeight = FontWeight.Bold)
         }
     }
 }
