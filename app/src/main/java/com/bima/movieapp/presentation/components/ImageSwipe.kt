@@ -14,13 +14,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -127,6 +130,18 @@ fun ImageSwipe(
                         navController.navigate(Screen.MovieDetailScreen.route + "/${state.movieList[index].id}")
                     })
                 }
+            }
+            if (state.error.isNotBlank()) {
+                Text(
+                    text = state.error,
+                    textAlign = TextAlign.Justify,
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Center)
+                )
+            }
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
             }
         }
     }
