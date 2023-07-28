@@ -13,23 +13,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bima.movieapp.presentation.components.NowPlayingList
+import com.bima.movieapp.presentation.components.MovieListItem
 import com.bima.movieapp.presentation.navigation.Screen
-import com.bima.movieapp.viewmodel.NowPlayingViewModel
+import com.bima.movieapp.viewmodel.MovieListViewModel
 
 @Composable
-fun NowPlayingScreen(
-    viewModel: NowPlayingViewModel = hiltViewModel(),
-    navController: NavController
+fun ListScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MovieListViewModel = hiltViewModel(),
+    navController: NavController,
 ) {
     val state = viewModel.state.value
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-
-        ) {
+            ) {
             items(state.movieList) { movie ->
-                NowPlayingList(
+                MovieListItem(
                     movieList = movie,
                     onItemClick = {
                         navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")

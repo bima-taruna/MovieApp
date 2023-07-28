@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bima.movieapp.presentation.navigation.Screen
-import com.bima.movieapp.viewmodel.TopRatedViewModel
 import com.bima.movieapp.viewmodel.UpcomingMovieViewModel
 
 @Composable
@@ -28,18 +27,19 @@ fun UpcomingMovies(
 ) {
     val state = viewModel.state.value
     Column {
-        SeeMore(title = "Upcoming")
+        SeeMore(
+            title = "Upcoming",
+            navController = navController,
+            type = "upcoming"
+        )
         Spacer(modifier = modifier.padding(8.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
             items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
-                MoviesList(
-                    movieList = movie,
-                    onClick = {
-                        navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-                    }
-                )
+              MoviesRow(movieList = movie, onClick = {
+                  navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
+              })
             }
         }
         if (state.error.isNotBlank()) {

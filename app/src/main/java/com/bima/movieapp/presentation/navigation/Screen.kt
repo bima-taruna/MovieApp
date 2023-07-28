@@ -13,4 +13,5 @@ sealed class Screen(val route:String,val name:String ,val icon: ImageVector) {
     object MovieSearchScreen: Screen("movie_search_screen","Search", Icons.Filled.Search)
     object MovieFavoriteScreen: Screen("movie_favorite_screen","Favorite", Icons.Filled.Favorite)
     object MovieDetailScreen: Screen("movie_detail_screen","None", Icons.Filled.AccountCircle)
+    object MovieListScreen: Screen("movie_list_screen","None", Icons.Filled.AccountCircle)
 }

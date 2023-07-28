@@ -12,11 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.bima.movieapp.presentation.navigation.Screen
+import com.bima.movieapp.viewmodel.state.MoviesState
 
 @Composable
 fun SeeMore(
     title:String,
-    modifier: Modifier = Modifier
+    type:String,
+    modifier: Modifier = Modifier,
+    navController: NavController,
 ) {
     Row(
         modifier = modifier
@@ -31,7 +36,9 @@ fun SeeMore(
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.SemiBold
         )
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = {
+            navController.navigate(Screen.MovieListScreen.route + "/" + type)
+        }) {
             Text(text = "See More", fontWeight = FontWeight.Bold)
         }
     }

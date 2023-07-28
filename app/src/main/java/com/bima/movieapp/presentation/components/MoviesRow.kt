@@ -21,7 +21,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun MoviesList(
+fun MoviesRow(
     movieList: MovieList,
     modifier: Modifier = Modifier,
     onClick: () -> Unit

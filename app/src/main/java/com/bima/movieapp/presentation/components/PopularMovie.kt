@@ -27,18 +27,20 @@ fun PopularMovie(
 ) {
     val state = viewModel.state.value
     Column {
-        SeeMore(title = "Now Playing")
+        SeeMore(
+            title = "Now Playing",
+            navController = navController,
+            type = "popular"
+        )
         Spacer(modifier = modifier.padding(8.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
            items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
-               MoviesList(
-                   movieList = movie,
-                   onClick = {
+               MoviesRow(movieList = movie, onClick = {
                    navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-                    }
-               )
+
+               })
            }
 
         }

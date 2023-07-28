@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bima.movieapp.presentation.FavoriteScreen
 import com.bima.movieapp.presentation.HomeScreen
+import com.bima.movieapp.presentation.ListScreen
 import com.bima.movieapp.presentation.MovieDetailScreen
-import com.bima.movieapp.presentation.NowPlayingScreen
 import com.bima.movieapp.presentation.SearchScreen
 
 @Composable
@@ -39,6 +39,11 @@ fun Navigation(
             route = Screen.MovieFavoriteScreen.route
         ) {
             FavoriteScreen()
+        }
+        composable(
+            route = Screen.MovieListScreen.route + "/{type}"
+        ) {
+            ListScreen(navController = navController)
         }
     }
 }
