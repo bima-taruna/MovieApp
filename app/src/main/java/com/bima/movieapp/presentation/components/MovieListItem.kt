@@ -2,6 +2,7 @@ package com.bima.movieapp.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,31 +28,34 @@ fun MovieListItem(
     onItemClick: (MovieList) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+
             .clickable {
                 onItemClick(movieList)
             }
-            .padding(20.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
     ) {
        Row(
            modifier = modifier,
-           verticalAlignment = Alignment.CenterVertically
+
        ) {
-           GlideImage(
-               imageModel = {
-                    Constant.IMG_URL_POSTER + movieList.posterPath
-                },
-               imageOptions = ImageOptions(
-                   contentScale = ContentScale.Crop
-               ),
-               modifier = modifier.width(150.dp)
-           )
-           Column(modifier = modifier.weight(1f)) {
-               Text(movieList.title.toString(), style = MaterialTheme.typography.bodyMedium)
-               Text(movieList.voteAverage.toString(), style = MaterialTheme.typography.bodyMedium)
+           Card() {
+               GlideImage(
+                   imageModel = {
+                       Constant.IMG_URL_POSTER + movieList.posterPath
+                   },
+                   imageOptions = ImageOptions(
+                       contentScale = ContentScale.Fit
+                   ),
+                   modifier = modifier.width(100.dp)
+               )
+           }
+           Column(modifier = modifier.weight(1f).padding(horizontal = 16.dp, vertical = 16.dp)) {
+               Text(movieList.title.toString(), style = MaterialTheme.typography.titleMedium, modifier = modifier.padding(bottom = 16.dp))
+               Text(movieList.voteAverage.toString(), style = MaterialTheme.typography.labelMedium)
+               Text(movieList.releaseDate, style = MaterialTheme.typography.labelMedium)
            }
        }
     }

@@ -9,7 +9,7 @@ data class Result(
     @SerializedName("backdrop_path")
     val backdropPath: String,
     @SerializedName("genre_ids")
-    val genreIds: List<Int>,
+    val genreIds: List<String>,
     @SerializedName("id")
     val id: Int,
     @SerializedName("original_language")

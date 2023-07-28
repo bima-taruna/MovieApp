@@ -24,7 +24,8 @@ fun MovieListDto.toMovieList() : List<MovieList> {
             title = it.title,
             backdropPath = it.backdropPath,
             posterPath = it.posterPath,
-            voteAverage = it.voteAverage
+            voteAverage = it.voteAverage,
+            releaseDate = it.releaseDate
         )
     }
 
