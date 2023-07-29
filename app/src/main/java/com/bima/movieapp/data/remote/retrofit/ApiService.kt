@@ -6,6 +6,7 @@ import com.bima.movieapp.data.remote.dto.movieReviewsDto.MovieReviewsDto
 import com.bima.movieapp.data.remote.dto.movieListDto.MovieListDto
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("movie/{type}")
@@ -27,4 +28,9 @@ interface ApiService {
     suspend fun getMovieCast(
         @Path("movie_id") movieId: String
     ) : MovieCastDto
+
+    @GET("search/movie")
+    suspend fun searchMovie(
+        @Query("query") query:String
+    ) : MovieListDto
 }

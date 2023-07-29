@@ -33,7 +33,7 @@ fun Navigation(
         composable(
             route = Screen.MovieSearchScreen.route
         ) {
-            SearchScreen()
+            SearchScreen(navController = navController)
         }
         composable(
             route = Screen.MovieFavoriteScreen.route

@@ -20,4 +20,5 @@ interface MovieRepository {
     fun getMovieCast(movieId:String) : Flow<Resource<List<Cast>?>>
 
     fun  getMovieList(type:String) :Flow<Resource<List<MovieList>>>
+    fun  getSearchedMovie(query:String) :Flow<Resource<List<MovieList>>>
 }

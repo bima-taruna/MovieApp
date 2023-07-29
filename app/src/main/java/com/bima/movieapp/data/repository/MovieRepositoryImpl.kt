@@ -126,4 +126,17 @@ class MovieRepositoryImpl @Inject constructor(
             emit(Resource.Error("couldn't reach server, please check your internet connection" ))
         }
     }
+
+    override fun getSearchedMovie(query: String): Flow<Resource<List<MovieList>>> = flow {
+        try {
+            emit(Resource.Loading())
+            val movies = apiService.searchMovie(query = query).toMovieList()
+            Log.d("success", movies.toString())
+            emit(Resource.Success(movies))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.localizedMessage ?: "error occured"))
+        } catch (e: IOException) {
+            emit(Resource.Error("couldn't reach server, please check your internet connection" ))
+        }
+    }
 }
