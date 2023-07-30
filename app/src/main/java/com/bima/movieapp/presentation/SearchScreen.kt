@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bima.movieapp.presentation.components.MovieList
 import com.bima.movieapp.presentation.components.MovieListItem
 import com.bima.movieapp.presentation.components.SearchBar
 import com.bima.movieapp.presentation.navigation.Screen
@@ -38,29 +39,7 @@ fun SearchScreen(
     ) {
         SearchBar()
         Spacer(modifier = modifier.padding(8.dp))
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            items(state.movieList) { movie ->
-                MovieListItem(
-                    movieList = movie,
-                    onItemClick = {
-                        navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-                    })
-            }
-        }
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
-            )
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-        }
+        MovieList(state = state, navController = navController)
     }
 
 }

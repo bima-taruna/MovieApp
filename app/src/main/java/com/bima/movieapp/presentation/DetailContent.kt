@@ -1,7 +1,9 @@
 package com.bima.movieapp.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,12 +14,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.bima.movieapp.R
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.presentation.components.ImageLoading
+import com.bima.movieapp.presentation.components.ImageNotFound
 import com.bima.movieapp.viewmodel.state.MovieDetailState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -28,12 +33,12 @@ fun DetailContent(
     state: MovieDetailState,
 ) {
     state.movie?.let { movie ->
-        val genresString = movie.genres.joinToString(separator = " | ")
+        val genresString = movie.genres?.joinToString(separator = " | ")
         Column(
             modifier = modifier
                 .fillMaxHeight(0.50f)
         ) {
-            ConstraintLayout() {
+            ConstraintLayout {
                 val (backDrop, poster, title, genres) = createRefs()
                 createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
                 GlideImage(
@@ -43,6 +48,9 @@ fun DetailContent(
                     ),
                     loading = {
                         ImageLoading()
+                    },
+                    failure = {
+                        ImageNotFound()
                     },
                     modifier = modifier
                         .fillMaxWidth()
@@ -69,7 +77,7 @@ fun DetailContent(
                     )
                 }
                 Text(
-                    text = movie.title,
+                    text = movie.title.toString(),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 4,
@@ -81,19 +89,22 @@ fun DetailContent(
                             top.linkTo(backDrop.bottom)
                         }
                 )
-                Text(
-                    text = genresString,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = modifier
-                        .padding(horizontal = 8.dp)
-                        .constrainAs(genres) {
-                            start.linkTo(title.start, margin = 8.dp)
-                            top.linkTo(title.bottom, margin = 8.dp)
-                            end.linkTo(title.end, margin = 8.dp)
-                        }.fillMaxWidth(0.7f)
-                )
+                if (genresString != null) {
+                    Text(
+                        text = genresString,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier
+                            .padding(horizontal = 8.dp)
+                            .constrainAs(genres) {
+                                start.linkTo(title.start, margin = 8.dp)
+                                top.linkTo(title.bottom, margin = 8.dp)
+                                end.linkTo(title.end, margin = 8.dp)
+                            }
+                            .fillMaxWidth(0.7f)
+                    )
+                }
 
 
             }

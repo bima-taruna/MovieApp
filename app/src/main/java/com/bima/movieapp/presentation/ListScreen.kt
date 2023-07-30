@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bima.movieapp.presentation.components.MovieList
 import com.bima.movieapp.presentation.components.MovieListItem
 import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.MovieListViewModel
@@ -25,29 +26,6 @@ fun ListScreen(
 ) {
     val state = viewModel.state.value
     Box(modifier = modifier.fillMaxSize()) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            ) {
-            items(state.movieList) { movie ->
-                MovieListItem(
-                    movieList = movie,
-                    onItemClick = {
-                        navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-                    })
-            }
-        }
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Center)
-            )
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-//        Text(text = state.error)
+        MovieList(state = state, navController = navController)
     }
 }
