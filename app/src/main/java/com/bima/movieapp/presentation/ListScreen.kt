@@ -26,6 +26,6 @@ fun ListScreen(
 ) {
     val state = viewModel.state.value
     Box(modifier = modifier.fillMaxSize()) {
-        MovieList(state = state, navController = navController)
+        MovieList(state = state, navController = navController, nextPage = {viewModel.nextPage()})
     }
 }

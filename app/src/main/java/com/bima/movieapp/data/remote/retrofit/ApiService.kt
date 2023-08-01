@@ -11,7 +11,8 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("movie/{type}")
     suspend fun getMovies(
-        @Path("type") type:String
+        @Path("type") type:String,
+        @Query("page") page:Int
     ) : MovieListDto
 
     @GET("movie/{movie_id}")

@@ -24,7 +24,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val nowPlaying = apiService.getMovies(type = "now_playing").toMovieList()
+            val nowPlaying = apiService.getMovies(type = "now_playing", page = 1).toMovieList()
             Log.d("success", nowPlaying.toString())
             emit(Resource.Success(nowPlaying))
         } catch (e: HttpException) {
@@ -38,7 +38,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getPopularMovies(): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val popular = apiService.getMovies(type = "popular").toMovieList()
+            val popular = apiService.getMovies(type = "popular", page = 1).toMovieList()
             Log.d("success", popular.toString())
             emit(Resource.Success(popular))
         } catch (e: HttpException) {
@@ -51,7 +51,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getTopRatedMovies(): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val topRated = apiService.getMovies(type = "top_rated").toMovieList()
+            val topRated = apiService.getMovies(type = "top_rated", page = 1).toMovieList()
             Log.d("success", topRated.toString())
             emit(Resource.Success(topRated))
         } catch (e: HttpException) {
@@ -64,7 +64,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getUpcomingMovies(): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val upcoming = apiService.getMovies(type = "upcoming").toMovieList()
+            val upcoming = apiService.getMovies(type = "upcoming", page = 1).toMovieList()
             Log.d("success", upcoming.toString())
             emit(Resource.Success(upcoming))
         } catch (e: HttpException) {
@@ -114,10 +114,10 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieList(type: String): Flow<Resource<List<MovieList>>> = flow {
+    override fun getMovieList(type: String,page:Int): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val movies = apiService.getMovies(type = type).toMovieList()
+            val movies = apiService.getMovies(type, page).toMovieList()
             Log.d("success", movies.toString())
             emit(Resource.Success(movies))
         } catch (e: HttpException) {
