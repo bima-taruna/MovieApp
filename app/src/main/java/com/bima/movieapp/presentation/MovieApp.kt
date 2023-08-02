@@ -41,6 +41,9 @@ fun MovieApp(
         "movie_favorite_screen" -> {
             bottomBarState.value = true
         }
+        "movie_list_screen/{type}" -> {
+            bottomBarState.value = false
+        }
         "movie_detail_screen/{movieId}" -> {
             bottomBarState.value = false
         }
