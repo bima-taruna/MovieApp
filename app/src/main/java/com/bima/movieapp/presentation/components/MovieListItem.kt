@@ -55,7 +55,7 @@ fun MovieListItem(
            Column(modifier = modifier.weight(1f).padding(horizontal = 16.dp, vertical = 16.dp)) {
                Text(movieList.title.toString(), style = MaterialTheme.typography.titleMedium, modifier = modifier.padding(bottom = 16.dp))
                Text(movieList.voteAverage.toString(), style = MaterialTheme.typography.labelMedium)
-               Text(movieList.releaseDate, style = MaterialTheme.typography.labelMedium)
+               Text(movieList.releaseDate.toString(), style = MaterialTheme.typography.labelMedium)
            }
        }
     }

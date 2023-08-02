@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,7 +32,7 @@ fun MovieList(
     state:MoviesState,
     modifier: Modifier = Modifier,
     navController:NavController,
-    nextPage : () -> Unit
+    nextPage : () -> Unit,
 ) {
     val lazyColumnListState = rememberLazyListState()
 
@@ -39,13 +40,12 @@ fun MovieList(
         modifier = Modifier.fillMaxSize(),
         state=lazyColumnListState
     ) {
-        items(state.movieList.size, key = {
-            state.movieList[it].id!!
-        }) { i ->
+        items(state.movieList.size) { i ->
             val movie = state.movieList[i]
             LaunchedEffect(i >= state.movieList.size - 1 && !state.isLoading) {
                 nextPage()
             }
+
             MovieListItem(
                 movieList = movie,
                 onItemClick = {

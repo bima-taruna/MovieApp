@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.bima.movieapp.presentation.components
 
 import android.util.Log
@@ -20,9 +22,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.viewmodel.SearchedMovieViewModel
@@ -33,11 +37,8 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     viewModel: SearchedMovieViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
     var text by remember { mutableStateOf("") }
-    Log.d("searchbar", text)
-    Log.d("page", viewModel.page.toString())
-//    Log.d("query", viewModel.query)
+    val localKeyboard = LocalSoftwareKeyboardController.current
 
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -48,9 +49,8 @@ fun SearchBar(
             onValueChange = {
                 text = it
                 viewModel.query = it
-                            },
+            },
             label = { Text("Search Movie") },
-//            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
             shape = RoundedCornerShape(100),
             colors = TextFieldDefaults.colors(
                 disabledTextColor = Color.Transparent,
@@ -64,8 +64,8 @@ fun SearchBar(
         )
         Button(
             onClick = {
+                localKeyboard?.hide()
                 viewModel.getSearchMovie()
-//                viewModel.query = text
                       },
             modifier = Modifier.height(56.dp)
         ) {

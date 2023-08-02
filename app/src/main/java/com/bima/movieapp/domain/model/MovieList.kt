@@ -6,5 +6,5 @@ data class MovieList(
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Any?,
-    val releaseDate:String
+    val releaseDate:String? = "TBA"
 )
