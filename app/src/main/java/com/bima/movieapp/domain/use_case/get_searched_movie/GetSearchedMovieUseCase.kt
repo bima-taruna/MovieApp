@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetSearchedMovieUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
-    operator fun invoke(query:String): Flow<Resource<List<MovieList>>> {
-        return repository.getSearchedMovie(query)
+    operator fun invoke(query:String, page:Int): Flow<Resource<List<MovieList>>> {
+        return repository.getSearchedMovie(query, page)
     }
 }

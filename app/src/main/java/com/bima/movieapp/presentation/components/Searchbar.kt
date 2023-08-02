@@ -1,5 +1,6 @@
 package com.bima.movieapp.presentation.components
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -34,13 +35,20 @@ fun SearchBar(
 ) {
     val context = LocalContext.current
     var text by remember { mutableStateOf("") }
+    Log.d("searchbar", text)
+    Log.d("page", viewModel.page.toString())
+//    Log.d("query", viewModel.query)
+
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         TextField(
             value = text,
-            onValueChange = { text = it},
+            onValueChange = {
+                text = it
+                viewModel.query = it
+                            },
             label = { Text("Search Movie") },
 //            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
             shape = RoundedCornerShape(100),
@@ -55,7 +63,10 @@ fun SearchBar(
                 .padding(end = 8.dp)
         )
         Button(
-            onClick = { viewModel.getSearchMovie(text) },
+            onClick = {
+                viewModel.getSearchMovie()
+//                viewModel.query = text
+                      },
             modifier = Modifier.height(56.dp)
         ) {
             Icon(Icons.Filled.Search, contentDescription = null)

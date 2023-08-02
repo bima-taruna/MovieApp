@@ -36,14 +36,10 @@ class MovieListViewModel @Inject constructor(
         getMovieListUseCase(type, page).onEach { result ->
             when(result) {
                 is Resource.Success -> {
-//                    _state.value = MoviesState(movieList = result.data ?: emptyList())
-
                         result.data?.map {
                             movieList.add(it)
                         }
                         _state.value = MoviesState(movieList = movieList)
-
-
                 }
                 is Resource.Error -> {
                     _state.value = MoviesState(error = result.message ?:

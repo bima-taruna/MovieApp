@@ -39,7 +39,7 @@ fun SearchScreen(
     ) {
         SearchBar()
         Spacer(modifier = modifier.padding(8.dp))
-        MovieList(state = state, navController = navController, nextPage = {})
+        MovieList(state = state, navController = navController, nextPage = {viewModel.nextPage()})
     }
 
 }

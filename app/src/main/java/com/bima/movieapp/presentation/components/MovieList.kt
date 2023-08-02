@@ -34,23 +34,17 @@ fun MovieList(
     nextPage : () -> Unit
 ) {
     val lazyColumnListState = rememberLazyListState()
-//    val shouldStartPaginate = remember {
-//        derivedStateOf {
-//            lazyColumnListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == lazyColumnListState.layoutInfo.totalItemsCount - 1
-//        }
-//    }
-//    Log.d("check", shouldStartPaginate.toString())
-//    Log.d("check2", lazyColumnListState.firstVisibleItemIndex.toString())
-//    Log.d("check3", state.movieList.lastIndex.toString())
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         state=lazyColumnListState
     ) {
-        items(state.movieList.size, key = { it }) { i ->
+        items(state.movieList.size, key = {
+            state.movieList[it].id!!
+        }) { i ->
             val movie = state.movieList[i]
-            if (i >= state.movieList.size - 1 && !state.isLoading) {
-               nextPage()
+            LaunchedEffect(i >= state.movieList.size - 1 && !state.isLoading) {
+                nextPage()
             }
             MovieListItem(
                 movieList = movie,
@@ -71,9 +65,6 @@ fun MovieList(
             }
         }
     }
-//    LaunchedEffect(shouldStartPaginate) {
-//        nextPage()
-//        Log.d("fire", "FIRE")
-//    }
+
 
 }

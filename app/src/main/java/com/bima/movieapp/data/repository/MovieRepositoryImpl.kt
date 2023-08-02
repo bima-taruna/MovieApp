@@ -127,10 +127,10 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getSearchedMovie(query: String): Flow<Resource<List<MovieList>>> = flow {
+    override fun getSearchedMovie(query: String, page:Int): Flow<Resource<List<MovieList>>> = flow {
         try {
             emit(Resource.Loading())
-            val movies = apiService.searchMovie(query = query).toMovieList()
+            val movies = apiService.searchMovie(query, page).toMovieList()
             Log.d("success", movies.toString())
             emit(Resource.Success(movies))
         } catch (e: HttpException) {
