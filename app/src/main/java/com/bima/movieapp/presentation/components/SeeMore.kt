@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bima.movieapp.presentation.navigation.Screen
-import com.bima.movieapp.viewmodel.state.MoviesState
 
 @Composable
 fun SeeMore(

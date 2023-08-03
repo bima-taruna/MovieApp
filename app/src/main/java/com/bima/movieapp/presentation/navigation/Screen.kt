@@ -1,6 +1,5 @@
 package com.bima.movieapp.presentation.navigation
 
-import android.graphics.drawable.VectorDrawable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite

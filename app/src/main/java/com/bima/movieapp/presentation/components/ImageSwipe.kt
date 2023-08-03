@@ -3,7 +3,6 @@
 package com.bima.movieapp.presentation.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,27 +12,22 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bima.movieapp.R
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.PopularViewModel
@@ -58,14 +52,14 @@ fun ImageSwipe(
             pageCount = state.movieList.size,
             state = pagerState,
         ) { index ->
-            ConstraintLayout() {
-                val (backDrop, title, buttonRow, spacer, box) = createRefs()
+            ConstraintLayout {
+                val (backDrop, title, buttonRow, spacer) = createRefs()
                 Box(
                     modifier = modifier
                         .fillMaxWidth()
                         .constrainAs(backDrop) {}
                 ) {
-                    Column() {
+                    Column {
                         GlideImage(
                             imageModel = { Constant.IMG_URL + state.movieList[index].backdropPath },
                             imageOptions = ImageOptions(

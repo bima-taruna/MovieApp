@@ -13,7 +13,7 @@ data class MovieCastDto(
     val id: Int?
 )
 
-fun MovieCastDto.toCast() : List<com.bima.movieapp.domain.model.Cast>? {
+fun MovieCastDto.toCast() : List<Cast>? {
     return cast?.map {
         Cast(
             name = it?.name,

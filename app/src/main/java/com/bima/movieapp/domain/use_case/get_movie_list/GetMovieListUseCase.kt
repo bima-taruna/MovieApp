@@ -1,7 +1,6 @@
 package com.bima.movieapp.domain.use_case.get_movie_list
 
 import com.bima.movieapp.common.Resource
-import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.domain.model.MovieList
 import com.bima.movieapp.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
