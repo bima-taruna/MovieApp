@@ -1,6 +1,7 @@
 package com.bima.movieapp.domain.repository
 
 import com.bima.movieapp.common.Resource
+import com.bima.movieapp.data.local.entity.Movies
 import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.domain.model.Movie
 import com.bima.movieapp.domain.model.MovieList
@@ -21,4 +22,10 @@ interface MovieRepository {
 
     fun  getMovieList(type:String, page:Int) :Flow<Resource<List<MovieList>>>
     fun  getSearchedMovie(query:String, page: Int) :Flow<Resource<List<MovieList>>>
+
+    fun getFavoriteMovies() : Flow<List<Movies>>
+
+    suspend fun insertMovies(movie:Movies)
+
+    suspend fun deleteMovies(movie: Movies)
 }

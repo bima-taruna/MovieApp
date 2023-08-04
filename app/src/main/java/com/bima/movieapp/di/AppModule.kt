@@ -1,7 +1,10 @@
 package com.bima.movieapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.bima.movieapp.BuildConfig
 import com.bima.movieapp.common.Constant
+import com.bima.movieapp.data.local.database.MoviesDatabase
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.data.repository.MovieRepositoryImpl
 import com.bima.movieapp.domain.repository.MovieRepository
@@ -55,6 +58,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideMoviesDatabase(app:Application): MoviesDatabase {
+        return Room.databaseBuilder(
+            app,
+            MoviesDatabase::class.java,
+            MoviesDatabase.DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
     fun provideMovieApi(client: OkHttpClient) : ApiService {
         return Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
@@ -66,7 +79,7 @@ object AppModule {
 
     @Provides
     @Singleton
-   fun provideMovieRepository(apiService: ApiService): MovieRepository {
-        return MovieRepositoryImpl(apiService)
+   fun provideMovieRepository(apiService: ApiService, db:MoviesDatabase): MovieRepository {
+        return MovieRepositoryImpl(apiService, db.moviesDao)
     }
 }

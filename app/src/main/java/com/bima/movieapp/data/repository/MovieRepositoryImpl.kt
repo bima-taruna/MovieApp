@@ -2,6 +2,8 @@ package com.bima.movieapp.data.repository
 
 import android.util.Log
 import com.bima.movieapp.common.Resource
+import com.bima.movieapp.data.local.dao.MoviesDao
+import com.bima.movieapp.data.local.entity.Movies
 import com.bima.movieapp.domain.model.Cast
 import com.bima.movieapp.data.remote.dto.movieCastDto.toCast
 import com.bima.movieapp.data.remote.dto.movieDetailDto.toMovie
@@ -19,7 +21,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val dao:MoviesDao
 ) : MovieRepository {
     override fun getNowPlayingMovies() : Flow<Resource<List<MovieList>>> = flow {
         try {
@@ -138,5 +141,17 @@ class MovieRepositoryImpl @Inject constructor(
         } catch (e: IOException) {
             emit(Resource.Error("couldn't reach server, please check your internet connection" ))
         }
+    }
+
+    override fun getFavoriteMovies(): Flow<List<Movies>> {
+        return dao.getMovies()
+    }
+
+    override suspend fun insertMovies(movie: Movies) {
+        dao.insertFavorite(movie)
+    }
+
+    override suspend fun deleteMovies(movie: Movies) {
+       dao.deleteMovies(movie)
     }
 }
