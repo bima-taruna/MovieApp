@@ -55,7 +55,6 @@ class MovieListViewModel @Inject constructor(
     }
     fun nextPage() {
         page++
-        Log.d("fire", "FIRE")
         getMovieList()
     }
 }

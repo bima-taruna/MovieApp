@@ -1,4 +1,4 @@
-package com.bima.movieapp.presentation
+package com.bima.movieapp.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,8 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.bima.movieapp.common.Constant
-import com.bima.movieapp.presentation.components.ImageLoading
-import com.bima.movieapp.presentation.components.ImageNotFound
 import com.bima.movieapp.viewmodel.state.MovieDetailState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage

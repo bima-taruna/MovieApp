@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bima.movieapp.presentation.components.DetailContent
 import com.bima.movieapp.presentation.components.tabs.DetailTabs
 import com.bima.movieapp.viewmodel.MovieDetailViewModel
 
