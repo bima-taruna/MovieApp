@@ -8,7 +8,8 @@ import com.bima.movieapp.data.local.entity.Movies
 
 @Database(
     entities = [Movies::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 
 abstract class MoviesDatabase:RoomDatabase() {

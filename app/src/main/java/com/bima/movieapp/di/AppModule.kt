@@ -8,6 +8,10 @@ import com.bima.movieapp.data.local.database.MoviesDatabase
 import com.bima.movieapp.data.remote.retrofit.ApiService
 import com.bima.movieapp.data.repository.MovieRepositoryImpl
 import com.bima.movieapp.domain.repository.MovieRepository
+import com.bima.movieapp.domain.use_case.get_fav_note.AddMovie
+import com.bima.movieapp.domain.use_case.get_fav_note.DeleteMovie
+import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_note.GetFavMovieUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -79,7 +83,17 @@ object AppModule {
 
     @Provides
     @Singleton
-   fun provideMovieRepository(apiService: ApiService, db:MoviesDatabase): MovieRepository {
+    fun provideMovieRepository(apiService: ApiService, db:MoviesDatabase): MovieRepository {
         return MovieRepositoryImpl(apiService, db.moviesDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieUseCases(repository: MovieRepository): FavMovieUseCases {
+        return FavMovieUseCases(
+            getFav = GetFavMovieUseCase(repository),
+            deleteMovie = DeleteMovie(repository),
+            addMovie = AddMovie(repository)
+        )
     }
 }

@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class)
+
 
 package com.bima.movieapp.presentation.components
 
@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,11 +31,13 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bima.movieapp.common.Constant
+import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.viewmodel.PopularViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImageSwipe(
     modifier: Modifier = Modifier,
@@ -130,12 +134,16 @@ fun ImageSwipe(
                 ) {
                     BigButton(
                         buttonText = "Add to Wishlist",
-                        onClick = {},
+                        onClick = {
+                                  viewModel.onEvent(FavEvent.AddMovie(state.movieList[index]), index)
+                        },
+                        icon = Icons.Default.FavoriteBorder,
                         modifier = modifier.weight(1f)
                     )
                     BigButton(
                         buttonText = "Detail",
                         modifier = modifier.weight(1f),
+                        icon = null,
                         onClick = {
                             navController.navigate(Screen.MovieDetailScreen.route + "/${state.movieList[index].id}")
                         })
@@ -156,3 +164,4 @@ fun ImageSwipe(
         }
     }
 }
+
