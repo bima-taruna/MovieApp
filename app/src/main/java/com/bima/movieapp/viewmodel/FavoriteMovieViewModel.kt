@@ -27,7 +27,7 @@ class FavoriteMovieViewModel @Inject constructor(
             }
             is FavEvent.DeleteMovie -> {
                 viewModelScope.launch {
-                    favMovieUseCase.deleteMovie(event.movie)
+
                 }
             }
         }

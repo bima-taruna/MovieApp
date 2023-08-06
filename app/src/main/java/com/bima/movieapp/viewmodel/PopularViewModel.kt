@@ -13,6 +13,7 @@ import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
 import com.bima.movieapp.domain.use_case.get_popular.GetPopularUseCase
 import com.bima.movieapp.viewmodel.state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -63,9 +64,21 @@ class PopularViewModel @Inject constructor(
             }
             is FavEvent.DeleteMovie -> {
                 viewModelScope.launch {
-                    favMovieUseCases.deleteMovie(event.movie)
+                    val movie = Movies(
+                        id = _state.value.movieList[index].id,
+                        title = _state.value.movieList[index].title,
+                        posterPath = Constant.IMG_URL_POSTER + _state.value.movieList[index].posterPath,
+                        backdropPath = Constant.IMG_URL + _state.value.movieList[index].backdropPath,
+                        voteAverage = _state.value.movieList[index].voteAverage as Double?,
+                        releaseDate = _state.value.movieList[index].releaseDate
+                    )
+                    favMovieUseCases.deleteMovie(movie)
                 }
             }
         }
+    }
+
+    fun getByTitle(title:String) : Flow<Movies> {
+        return favMovieUseCases.getByTitle(title)
     }
 }

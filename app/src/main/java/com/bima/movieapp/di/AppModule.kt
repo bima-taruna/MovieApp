@@ -11,6 +11,7 @@ import com.bima.movieapp.domain.repository.MovieRepository
 import com.bima.movieapp.domain.use_case.get_fav_note.AddMovie
 import com.bima.movieapp.domain.use_case.get_fav_note.DeleteMovie
 import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_note.GetByTitle
 import com.bima.movieapp.domain.use_case.get_fav_note.GetFavMovieUseCase
 import dagger.Module
 import dagger.Provides
@@ -93,7 +94,8 @@ object AppModule {
         return FavMovieUseCases(
             getFav = GetFavMovieUseCase(repository),
             deleteMovie = DeleteMovie(repository),
-            addMovie = AddMovie(repository)
+            addMovie = AddMovie(repository),
+            getByTitle = GetByTitle(repository)
         )
     }
 }

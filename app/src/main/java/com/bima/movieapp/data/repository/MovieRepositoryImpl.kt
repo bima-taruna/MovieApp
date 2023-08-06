@@ -154,4 +154,8 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun deleteMovies(movie: Movies) {
        dao.deleteMovies(movie)
     }
+
+    override fun getByTitle(title:String): Flow<Movies> {
+       return dao.getFavoriteUserByUsername(title)
+    }
 }

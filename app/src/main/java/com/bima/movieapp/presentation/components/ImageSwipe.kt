@@ -15,11 +15,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -47,6 +50,8 @@ fun ImageSwipe(
     val state = viewModel.state.value
     val pagerState = rememberPagerState()
 
+
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -56,6 +61,11 @@ fun ImageSwipe(
             pageCount = state.movieList.size,
             state = pagerState,
         ) { index ->
+            val movieTitle = state.movieList[index].title
+
+            val isMovieInDatabase by viewModel.getByTitle(movieTitle.toString())
+                .collectAsState(initial = null)
+
             ConstraintLayout {
                 val (backDrop, title, buttonRow, spacer) = createRefs()
                 Box(
@@ -135,9 +145,14 @@ fun ImageSwipe(
                     BigButton(
                         buttonText = "Add to Wishlist",
                         onClick = {
-                                  viewModel.onEvent(FavEvent.AddMovie(state.movieList[index]), index)
+                            if (isMovieInDatabase != null) {
+                                viewModel.onEvent(FavEvent.DeleteMovie(state.movieList[index]), index)
+                            } else {
+
+                                viewModel.onEvent(FavEvent.AddMovie(state.movieList[index]), index)
+                            }
                         },
-                        icon = Icons.Default.FavoriteBorder,
+                        icon = if(isMovieInDatabase != null) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         modifier = modifier.weight(1f)
                     )
                     BigButton(

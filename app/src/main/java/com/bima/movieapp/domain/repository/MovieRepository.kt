@@ -28,4 +28,6 @@ interface MovieRepository {
     suspend fun insertMovies(movie:Movies)
 
     suspend fun deleteMovies(movie: Movies)
+
+    fun getByTitle(title:String) : Flow<Movies>
 }

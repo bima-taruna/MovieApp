@@ -13,8 +13,8 @@ interface MoviesDao {
     @Query("SELECT * FROM movies")
     fun getMovies() : Flow<List<Movies>>
 
-//    @Query("SELECT * FROM movies WHERE title = :title")
-//    fun getFavoriteUserByUsername(username: String): LiveData<GithubUserEntity>
+    @Query("SELECT * FROM movies WHERE title = :title")
+    fun getFavoriteUserByUsername(title: String): Flow<Movies>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(movies : Movies)
