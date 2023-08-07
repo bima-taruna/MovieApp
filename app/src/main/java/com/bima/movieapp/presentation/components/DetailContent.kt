@@ -1,12 +1,20 @@
 package com.bima.movieapp.presentation.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +41,7 @@ fun DetailContent(
                 .fillMaxHeight(0.50f)
         ) {
             ConstraintLayout {
-                val (backDrop, poster, title, genres) = createRefs()
+                val (backDrop, poster, title, genres, favorite) = createRefs()
                 createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
                 GlideImage(
                     imageModel = { Constant.IMG_URL + movie.backdropPath },
@@ -50,6 +58,22 @@ fun DetailContent(
                         .fillMaxWidth()
                         .constrainAs(backDrop) {},
                 )
+                IconButton(
+                    onClick = { /*TODO*/ },
+                    modifier = modifier
+                        .constrainAs(favorite) {
+                            end.linkTo(backDrop.end, margin = 8.dp)
+                            top.linkTo(backDrop.top, margin = 8.dp)
+                        }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "favorite button",
+                        tint = MaterialTheme.colorScheme.background,
+                        modifier = modifier
+                            .size(80.dp)
+                    )
+                }
                 Card(modifier = modifier
                     .height(150.dp)
                     .fillMaxWidth(0.3f)
