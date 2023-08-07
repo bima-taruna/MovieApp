@@ -49,7 +49,7 @@ class PopularViewModel @Inject constructor(
 
     fun onEvent(event:FavEvent,index:Int) {
         when(event) {
-            is FavEvent.AddMovie -> {
+            is FavEvent.AddMovie<*> -> {
                 viewModelScope.launch {
                     val movie = Movies(
                         id = _state.value.movieList[index].id,
@@ -62,7 +62,7 @@ class PopularViewModel @Inject constructor(
                     favMovieUseCases.addMovie(movie)
                 }
             }
-            is FavEvent.DeleteMovie -> {
+            is FavEvent.DeleteMovie<*> -> {
                 viewModelScope.launch {
                     val movie = Movies(
                         id = _state.value.movieList[index].id,

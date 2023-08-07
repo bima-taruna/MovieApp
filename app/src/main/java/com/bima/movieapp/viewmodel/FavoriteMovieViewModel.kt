@@ -20,18 +20,18 @@ class FavoriteMovieViewModel @Inject constructor(
     private val _state = mutableStateOf<FavState>(FavState())
     val state: State<FavState> = _state
 
-    fun onEvent(event:FavEvent) {
-        when(event) {
-            is FavEvent.AddMovie -> {
-
-            }
-            is FavEvent.DeleteMovie -> {
-                viewModelScope.launch {
-
-                }
-            }
-        }
-    }
+//    fun onEvent(event:FavEvent) {
+//        when(event) {
+//            is FavEvent.AddMovie -> {
+//
+//            }
+//            is FavEvent.DeleteMovie -> {
+//                viewModelScope.launch {
+//
+//                }
+//            }
+//        }
+//    }
 
     fun getFavorite() {
         favMovieUseCase.getFav()

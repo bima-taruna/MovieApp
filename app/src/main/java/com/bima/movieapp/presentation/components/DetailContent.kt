@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -18,7 +19,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -33,9 +36,12 @@ import com.skydoves.landscapist.glide.GlideImage
 fun DetailContent(
     modifier: Modifier = Modifier,
     state: MovieDetailState,
+    check: Boolean,
+    onClick : () -> Unit
 ) {
     state.movie?.let { movie ->
         val genresString = movie.genres?.joinToString(separator = " | ")
+
         Column(
             modifier = modifier
                 .fillMaxHeight(0.50f)
@@ -59,7 +65,7 @@ fun DetailContent(
                         .constrainAs(backDrop) {},
                 )
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = onClick,
                     modifier = modifier
                         .constrainAs(favorite) {
                             end.linkTo(backDrop.end, margin = 8.dp)
@@ -67,9 +73,9 @@ fun DetailContent(
                         }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if (check) Icons.Default.FavoriteBorder else Icons.Default.Favorite,
                         contentDescription = "favorite button",
-                        tint = MaterialTheme.colorScheme.background,
+                        tint = Color.Red,
                         modifier = modifier
                             .size(80.dp)
                     )
