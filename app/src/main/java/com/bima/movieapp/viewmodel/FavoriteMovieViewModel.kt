@@ -4,14 +4,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
-import com.bima.movieapp.domain.use_case.get_fav_note.GetFavMovieUseCase
 import com.bima.movieapp.viewmodel.state.FavState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
