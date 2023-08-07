@@ -36,7 +36,7 @@ fun Navigation(
         composable(
             route = Screen.MovieFavoriteScreen.route
         ) {
-            FavoriteScreen()
+            FavoriteScreen(navController = navController)
         }
         composable(
             route = Screen.MovieListScreen.route + "/{type}"

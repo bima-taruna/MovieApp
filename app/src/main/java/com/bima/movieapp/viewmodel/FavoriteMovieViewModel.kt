@@ -16,8 +16,7 @@ class FavoriteMovieViewModel @Inject constructor(
     private val favMovieUseCase: FavMovieUseCases
 ) : ViewModel() {
 
-
-    private val _state = mutableStateOf<FavState>(FavState())
+    private val _state = mutableStateOf(FavState())
     val state: State<FavState> = _state
 
     init {
