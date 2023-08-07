@@ -1,5 +1,6 @@
 
 package com.bima.movieapp.presentation
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,6 +38,7 @@ fun MovieDetailScreen(
     var check by remember {
         mutableStateOf(false)
     }
+    val context = LocalContext.current
     val isMovieInDatabase by viewModel.getByTitle(movieTitle.toString())
         .collectAsState(initial = null)
 
@@ -49,8 +52,10 @@ fun MovieDetailScreen(
             DetailContent(state = state, check = check, onClick = {
                 if (isMovieInDatabase != null) {
                     viewModel.onEvent(FavEvent.DeleteMovie(state.movie))
+                    Toast.makeText(context, "Delete ${state.movie?.title} from Favorite", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.onEvent(FavEvent.AddMovie(state.movie))
+                    Toast.makeText(context, "Added ${state.movie?.title} to Favorite", Toast.LENGTH_SHORT).show()
                 }
             })
             Spacer(modifier = modifier.padding(16.dp))

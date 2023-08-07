@@ -2,6 +2,7 @@
 
 package com.bima.movieapp.presentation.components
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -65,6 +67,8 @@ fun ImageSwipe(
 
             val isMovieInDatabase by viewModel.getByTitle(movieTitle.toString())
                 .collectAsState(initial = null)
+
+            val context = LocalContext.current
 
             ConstraintLayout {
                 val (backDrop, title, buttonRow, spacer) = createRefs()
@@ -147,9 +151,10 @@ fun ImageSwipe(
                         onClick = {
                             if (isMovieInDatabase != null) {
                                 viewModel.onEvent(FavEvent.DeleteMovie(state.movieList[index]), index)
+                                Toast.makeText(context, "Delete ${state.movieList[index].title} from Favorite", Toast.LENGTH_SHORT).show()
                             } else {
-
                                 viewModel.onEvent(FavEvent.AddMovie(state.movieList[index]), index)
+                                Toast.makeText(context, "Added ${state.movieList[index].title} to Favorite", Toast.LENGTH_SHORT).show()
                             }
                         },
                         icon = if(isMovieInDatabase != null) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
