@@ -9,6 +9,8 @@ import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
 import com.bima.movieapp.domain.use_case.get_fav_note.GetFavMovieUseCase
 import com.bima.movieapp.viewmodel.state.FavState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,23 +19,19 @@ class FavoriteMovieViewModel @Inject constructor(
     private val favMovieUseCase: FavMovieUseCases
 ) : ViewModel() {
 
+
     private val _state = mutableStateOf<FavState>(FavState())
     val state: State<FavState> = _state
 
-//    fun onEvent(event:FavEvent) {
-//        when(event) {
-//            is FavEvent.AddMovie -> {
-//
-//            }
-//            is FavEvent.DeleteMovie -> {
-//                viewModelScope.launch {
-//
-//                }
-//            }
-//        }
-//    }
+    init {
+        getFavorite()
+    }
 
-    fun getFavorite() {
-        favMovieUseCase.getFav()
+   private fun getFavorite() {
+        favMovieUseCase.getFav().onEach {
+            _state.value = state.value.copy(
+                movies = it
+            )
+        }.launchIn(viewModelScope)
     }
 }
