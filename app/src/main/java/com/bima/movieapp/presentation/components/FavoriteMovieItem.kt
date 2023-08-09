@@ -16,7 +16,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.data.local.entity.Movies
-import com.bima.movieapp.domain.model.MovieList
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 

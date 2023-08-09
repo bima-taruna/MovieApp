@@ -22,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.common.FavEvent
-import com.bima.movieapp.domain.model.MovieList
 import com.bima.movieapp.presentation.components.DetailContent
 import com.bima.movieapp.presentation.components.tabs.DetailTabs
 import com.bima.movieapp.viewmodel.MovieDetailViewModel
@@ -31,7 +30,6 @@ import com.bima.movieapp.viewmodel.MovieDetailViewModel
 fun MovieDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: MovieDetailViewModel = hiltViewModel(),
-
     ) {
     val state = viewModel.state.value
     val movieTitle = state.movie?.title
