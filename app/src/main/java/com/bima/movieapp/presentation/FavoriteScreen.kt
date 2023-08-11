@@ -22,17 +22,17 @@ fun FavoriteScreen(
 ) {
     val state = viewModel.state.value
 
-        LazyColumn(modifier = modifier.fillMaxSize()) {
-            items(state.movies.size) { i ->
-                val movie = state.movies[i]
-                FavoriteMovieItem(movieList = movie, onItemClick = {
+    LazyColumn(modifier = modifier.fillMaxSize()) {
+        items(state.movies.size) { i ->
+            val movie = state.movies[i]
+            FavoriteMovieItem(movieList = movie, onItemClick = {
                     navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-                })
-            }
-        }
-        if(state.movies.isEmpty()) {
-            Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-                Text(text = "Favorite Movies is Empty", textAlign = TextAlign.Center)
-            }
+            })
         }
     }
+    if(state.movies.isEmpty()) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            Text(text = "Favorite Movies is Empty", textAlign = TextAlign.Center)
+        }
+    }
+}
