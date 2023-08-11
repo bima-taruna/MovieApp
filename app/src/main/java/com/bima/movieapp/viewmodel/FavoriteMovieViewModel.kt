@@ -30,4 +30,12 @@ class FavoriteMovieViewModel @Inject constructor(
             )
         }.launchIn(viewModelScope)
     }
+
+    fun searchFavorite(query:String) {
+        if(query.isNotBlank()) {
+            _state.value.movies.filter {
+                it.title == query
+            }
+        }
+    }
 }
