@@ -46,8 +46,6 @@ class FavoriteMovieViewModel @Inject constructor(
             _state.value = state.value.copy(
                 movies = filteredList
             )
-        } else {
-            getFavorite()
         }
     }
 }

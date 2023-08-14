@@ -32,7 +32,7 @@ fun ListScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(title.toString())
+                    if (title.isNullOrEmpty()) Text("") else Text(title)
                 },
                 navigationIcon = {
                     IconButton(onClick = {
