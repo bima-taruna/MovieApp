@@ -39,7 +39,6 @@ fun PopularMovie(
            items(state.movieList.subList(0, state.movieList.size / 2)) { movie->
                MoviesRow(movieList = movie, onClick = {
                    navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
-
                })
            }
 

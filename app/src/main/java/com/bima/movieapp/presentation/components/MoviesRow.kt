@@ -31,28 +31,7 @@ fun MoviesRow(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Card(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp)
-                .height(200.dp)
-                .clickable {
-                    onClick()
-                }
-        ) {
-            GlideImage(
-                imageModel = { Constant.IMG_URL_POSTER + movieList.posterPath },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.Fit
-                ),
-                loading = {
-                    CircularProgressIndicator()
-                },
-                failure = {
-                    ImageNotFound()
-                }
-            )
-        }
+        MovieCardSmall(movieList = movieList, onClick = onClick)
         Spacer(modifier = modifier.padding(4.dp))
         Text(
             text = movieList.title.toString(),

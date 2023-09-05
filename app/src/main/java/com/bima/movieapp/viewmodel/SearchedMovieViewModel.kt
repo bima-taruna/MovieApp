@@ -32,7 +32,6 @@ class SearchedMovieViewModel @Inject constructor(
         getSearchedMovieUseCase(query, page).onEach { result ->
             when(result) {
                 is Resource.Success -> {
-//                    _state.value = MoviesState(movieList = result.data ?: emptyList())
                     if (page==1) {
                         movieList.clear()
                     }
