@@ -48,7 +48,7 @@ fun DetailContent(
                 GlideImage(
                     imageModel = { Constant.IMG_URL + movie.backdropPath },
                     imageOptions = ImageOptions(
-                        contentScale = ContentScale.Fit
+                        contentScale = ContentScale.FillWidth
                     ),
                     loading = {
                         ImageLoading()
@@ -57,7 +57,7 @@ fun DetailContent(
                         ImageNotFound()
                     },
                     modifier = modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(1f)
                         .constrainAs(backDrop) {},
                 )
                 IconButton(
