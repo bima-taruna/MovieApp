@@ -5,6 +5,7 @@ package com.bima.movieapp.presentation.components
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -145,9 +146,11 @@ fun ImageSwipe(
                             top.linkTo(spacer.bottom)
                             bottom.linkTo(backDrop.bottom)
                         },
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     BigButton(
                         buttonText = "Add to Wishlist",
+                        modifier = modifier.weight(1f),
                         onClick = {
                             if (isMovieInDatabase != null) {
                                 viewModel.onEvent(FavEvent.DeleteMovie(state.movieList[index]), index)
@@ -158,7 +161,7 @@ fun ImageSwipe(
                             }
                         },
                         icon = if(isMovieInDatabase != null) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        modifier = modifier.weight(1f)
+
                     )
                     BigButton(
                         buttonText = "Detail",
