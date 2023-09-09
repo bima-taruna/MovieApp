@@ -1,6 +1,5 @@
 package com.bima.movieapp.presentation
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -37,7 +36,6 @@ fun MovieApp(
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-    Log.d("screen",windowInfo.screenWidthInfo.toString())
 
     when (navBackStackEntry?.destination?.route) {
         "now_playing_screen" -> {

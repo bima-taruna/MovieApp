@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -39,6 +40,8 @@ import androidx.navigation.NavController
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.presentation.navigation.Screen
+import com.bima.movieapp.presentation.responsive.WindowInfo
+import com.bima.movieapp.presentation.responsive.rememberWindowInfo
 import com.bima.movieapp.viewmodel.PopularViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -52,8 +55,8 @@ fun ImageSwipe(
 ) {
     val state = viewModel.state.value
     val pagerState = rememberPagerState()
-
-
+    val windowInfo = rememberWindowInfo()
+    val backDropHeight = if (windowInfo.screenWidthInfo != WindowInfo.WindowType.Compact) windowInfo.screenHeight / 1.75f else windowInfo.screenHeight / 3
 
     Box(
         modifier = modifier
@@ -76,13 +79,14 @@ fun ImageSwipe(
                 Box(
                     modifier = modifier
                         .fillMaxWidth()
+                        .height(backDropHeight)
                         .constrainAs(backDrop) {}
                 ) {
                     Column {
                         GlideImage(
                             imageModel = { Constant.IMG_URL + state.movieList[index].backdropPath },
                             imageOptions = ImageOptions(
-                                contentScale = ContentScale.Fit,
+                                contentScale = ContentScale.FillWidth,
                                 contentDescription = state.movieList[index].title + " image"
                             ),
                             failure = {
