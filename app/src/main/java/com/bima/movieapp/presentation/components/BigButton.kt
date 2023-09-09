@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -37,6 +38,7 @@ fun BigButton(
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
+                    modifier.size(18.dp)
                 )
             }
             Text(text = buttonText,  fontWeight = FontWeight.Bold, )
