@@ -1,7 +1,9 @@
 package com.bima.movieapp.presentation
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -70,7 +72,13 @@ fun MovieApp(
         content = { innerPadding ->
             Row() {
                 if (windowInfo.screenWidthInfo != WindowInfo.WindowType.Compact) {
-                    NavigationRailLayout(navController = navController, items = bottomNavigationItems)
+                    AnimatedVisibility(
+                        visible = bottomBarState.value,
+                        enter = slideInHorizontally(initialOffsetX = { it }),
+                        exit = slideOutHorizontally(targetOffsetX = { it })
+                    ) {
+                        NavigationRailLayout(navController = navController, items = bottomNavigationItems)
+                    }
                 }
                 Box(modifier = modifier.padding(innerPadding)){
                     Navigation(navController = navController)

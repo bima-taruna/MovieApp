@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,21 +29,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.presentation.navigation.Screen
 import com.bima.movieapp.presentation.responsive.WindowInfo
 import com.bima.movieapp.presentation.responsive.rememberWindowInfo
 import com.bima.movieapp.viewmodel.PopularViewModel
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.glide.GlideImage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -83,31 +78,7 @@ fun ImageSwipe(
                         .constrainAs(backDrop) {}
                 ) {
                     Column {
-                        GlideImage(
-                            imageModel = { Constant.IMG_URL + state.movieList[index].backdropPath },
-                            imageOptions = ImageOptions(
-                                contentScale = ContentScale.FillWidth,
-                                contentDescription = state.movieList[index].title + " image"
-                            ),
-                            failure = {
-                               ImageNotFound()
-                            },
-                            loading = {
-                                ImageLoading()
-                            }
-                        )
-                        Box(
-                            modifier = modifier
-                                .fillMaxSize()
-                                .background(
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            MaterialTheme.colorScheme.background,
-                                            Color.Transparent
-                                        )
-                                    )
-                                )
-                        )
+                       BackdropImage(state = state, index = index)
                     }
                 }
 

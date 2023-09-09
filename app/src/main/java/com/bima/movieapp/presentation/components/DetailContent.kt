@@ -1,5 +1,6 @@
 package com.bima.movieapp.presentation.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,7 +38,6 @@ fun DetailContent(
 ) {
     state.movie?.let { movie ->
         val genresString = movie.genres?.joinToString(separator = " | ")
-
         Column(
             modifier = modifier
                 .fillMaxHeight(0.50f)
@@ -45,21 +45,27 @@ fun DetailContent(
             ConstraintLayout {
                 val (backDrop, poster, title, genres, favorite) = createRefs()
                 createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
-                GlideImage(
-                    imageModel = { Constant.IMG_URL + movie.backdropPath },
-                    imageOptions = ImageOptions(
-                        contentScale = ContentScale.FillWidth
-                    ),
-                    loading = {
-                        ImageLoading()
-                    },
-                    failure = {
-                        ImageNotFound()
-                    },
+                Box(
                     modifier = modifier
-                        .fillMaxWidth(1f)
+                        .fillMaxWidth()
                         .constrainAs(backDrop) {},
-                )
+                ) {
+                    Column {
+                        GlideImage(
+                            imageModel = { Constant.IMG_URL + movie.backdropPath },
+                            imageOptions = ImageOptions(
+                                contentScale = ContentScale.FillWidth
+                            ),
+                            loading = {
+                                ImageLoading()
+                            },
+                            failure = {
+                                ImageNotFound()
+                            },
+                            modifier = modifier
+                        )
+                    }
+                }
                 IconButton(
                     onClick = onClick,
                     modifier = modifier
