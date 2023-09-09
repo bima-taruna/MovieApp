@@ -3,6 +3,7 @@ package com.bima.movieapp.presentation
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.presentation.components.DetailContent
 import com.bima.movieapp.presentation.components.tabs.DetailTabs
+import com.bima.movieapp.presentation.responsive.WindowInfo
+import com.bima.movieapp.presentation.responsive.rememberWindowInfo
 import com.bima.movieapp.viewmodel.MovieDetailViewModel
 
 @Composable
@@ -39,6 +42,7 @@ fun MovieDetailScreen(
     val context = LocalContext.current
     val isMovieInDatabase by viewModel.getByTitle(movieTitle.toString())
         .collectAsState(initial = null)
+    val windowInfo = rememberWindowInfo()
 
     check = isMovieInDatabase == null
     Box(
@@ -46,18 +50,33 @@ fun MovieDetailScreen(
             .fillMaxSize()
 
     ) {
-        Column {
-            DetailContent(state = state, check = check, onClick = {
-                if (isMovieInDatabase != null) {
-                    viewModel.onEvent(FavEvent.DeleteMovie(state.movie))
-                    Toast.makeText(context, "Delete ${state.movie?.title} from Favorite", Toast.LENGTH_SHORT).show()
-                } else {
-                    viewModel.onEvent(FavEvent.AddMovie(state.movie))
-                    Toast.makeText(context, "Added ${state.movie?.title} to Favorite", Toast.LENGTH_SHORT).show()
-                }
-            })
-            Spacer(modifier = modifier.padding(16.dp))
-            DetailTabs(content = state.movie?.overview.toString(), movieId = state.movie?.id.toString())
+        if (windowInfo.screenWidthInfo != WindowInfo.WindowType.Compact) {
+            Row {
+                DetailContent(state = state, check = check, onClick = {
+                    if (isMovieInDatabase != null) {
+                        viewModel.onEvent(FavEvent.DeleteMovie(state.movie))
+                        Toast.makeText(context, "Delete ${state.movie?.title} from Favorite", Toast.LENGTH_SHORT).show()
+                    } else {
+                        viewModel.onEvent(FavEvent.AddMovie(state.movie))
+                        Toast.makeText(context, "Added ${state.movie?.title} to Favorite", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                DetailTabs(content = state.movie?.overview.toString(), movieId = state.movie?.id.toString())
+            }
+        } else {
+            Column {
+                DetailContent(state = state, check = check, onClick = {
+                    if (isMovieInDatabase != null) {
+                        viewModel.onEvent(FavEvent.DeleteMovie(state.movie))
+                        Toast.makeText(context, "Delete ${state.movie?.title} from Favorite", Toast.LENGTH_SHORT).show()
+                    } else {
+                        viewModel.onEvent(FavEvent.AddMovie(state.movie))
+                        Toast.makeText(context, "Added ${state.movie?.title} to Favorite", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                Spacer(modifier = modifier.padding(16.dp))
+                DetailTabs(content = state.movie?.overview.toString(), movieId = state.movie?.id.toString())
+            }
         }
         if (state.error.isNotBlank()) {
             Text(

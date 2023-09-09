@@ -75,7 +75,7 @@ fun MovieApp(
                     AnimatedVisibility(
                         visible = bottomBarState.value,
                         enter = slideInHorizontally(initialOffsetX = { it }),
-                        exit = slideOutHorizontally(targetOffsetX = { it })
+                        exit = slideOutHorizontally(targetOffsetX = { -it })
                     ) {
                         NavigationRailLayout(navController = navController, items = bottomNavigationItems)
                     }
