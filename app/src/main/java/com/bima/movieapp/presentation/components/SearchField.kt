@@ -45,6 +45,8 @@ fun SearchField(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
             ),
+            minLines = 3,
+            maxLines = 20,
             modifier = modifier
                 .weight(1f)
                 .padding(end = 8.dp)
