@@ -1,21 +1,28 @@
 package com.bima.movieapp.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.bima.movieapp.BuildConfig
 import com.bima.movieapp.common.Constant
 import com.bima.movieapp.data.local.database.MoviesDatabase
 import com.bima.movieapp.data.remote.retrofit.ApiService
+import com.bima.movieapp.data.repository.DataStoreRepositoryImpl
 import com.bima.movieapp.data.repository.MovieRepositoryImpl
+import com.bima.movieapp.domain.repository.DataStoreRepository
 import com.bima.movieapp.domain.repository.MovieRepository
-import com.bima.movieapp.domain.use_case.get_fav_note.AddMovie
-import com.bima.movieapp.domain.use_case.get_fav_note.DeleteMovie
-import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
-import com.bima.movieapp.domain.use_case.get_fav_note.GetByTitle
-import com.bima.movieapp.domain.use_case.get_fav_note.GetFavMovieUseCase
+import com.bima.movieapp.domain.use_case.get_fav_movie.AddMovie
+import com.bima.movieapp.domain.use_case.get_fav_movie.DeleteMovie
+import com.bima.movieapp.domain.use_case.get_fav_movie.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_movie.GetByTitle
+import com.bima.movieapp.domain.use_case.get_fav_movie.GetFavMovieUseCase
+import com.bima.movieapp.domain.use_case.ui_mode.GetUiMode
+import com.bima.movieapp.domain.use_case.ui_mode.SetUiMode
+import com.bima.movieapp.domain.use_case.ui_mode.UiModeUsesCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -96,6 +103,23 @@ object AppModule {
             deleteMovie = DeleteMovie(repository),
             addMovie = AddMovie(repository),
             getByTitle = GetByTitle(repository)
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideDataStoreRepository(
+        @ApplicationContext app: Context
+    ): DataStoreRepository {
+        return DataStoreRepositoryImpl(app)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUiDataStore(repository: DataStoreRepository): UiModeUsesCases {
+        return UiModeUsesCases(
+            getUiMode = GetUiMode(repository),
+            setUiMode = SetUiMode(repository)
         )
     }
 }

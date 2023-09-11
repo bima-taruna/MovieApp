@@ -1,4 +1,4 @@
-package com.bima.movieapp.domain.use_case.get_fav_note
+package com.bima.movieapp.domain.use_case.get_fav_movie
 
 data class FavMovieUseCases(
     val getFav : GetFavMovieUseCase,

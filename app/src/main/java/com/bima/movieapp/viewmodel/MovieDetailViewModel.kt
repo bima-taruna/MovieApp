@@ -10,7 +10,7 @@ import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.data.local.entity.Movies
-import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_movie.FavMovieUseCases
 import com.bima.movieapp.domain.use_case.get_movie.GetMovieUseCase
 import com.bima.movieapp.viewmodel.state.MovieDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,41 +24,42 @@ import javax.inject.Inject
 class MovieDetailViewModel @Inject constructor(
     private val getMovieUseCase: GetMovieUseCase,
     private val favMovieUseCases: FavMovieUseCases,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _state = mutableStateOf(MovieDetailState())
     val state: MutableState<MovieDetailState> = _state
 
     init {
-
-           savedStateHandle.get<String>(Constant.PARAM_MOVIE_ID)?.let { movieId->
-               getMovieDetail(movieId)
-           }
-
+        savedStateHandle.get<String>(Constant.PARAM_MOVIE_ID)?.let { movieId ->
+            getMovieDetail(movieId)
+        }
     }
 
-    private fun getMovieDetail(movieId:String = "455476") {
+    private fun getMovieDetail(movieId: String = "455476") {
 
-            getMovieUseCase(movieId).onEach { result ->
-                when(result) {
-                    is Resource.Success -> {
-                        _state.value = MovieDetailState(movie = result.data)
-                        Log.d("vm", "berhasil")
-                    }
-                    is Resource.Error -> {
-                        _state.value = MovieDetailState(error = result.message ?:
-                        "An unexpected error occured")
-                        Log.d("vm", "gagal")
-                    }
-                    is Resource.Loading -> {
-                        _state.value = MovieDetailState(isLoading = true)
-                    }
+        getMovieUseCase(movieId).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _state.value = MovieDetailState(movie = result.data)
+                    Log.d("vm", "berhasil")
                 }
-            }.launchIn(viewModelScope)
+
+                is Resource.Error -> {
+                    _state.value = MovieDetailState(
+                        error = result.message ?: "An unexpected error occured"
+                    )
+                    Log.d("vm", "gagal")
+                }
+
+                is Resource.Loading -> {
+                    _state.value = MovieDetailState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun onEvent(event: FavEvent) {
-        when(event) {
+        when (event) {
             is FavEvent.AddMovie<*> -> {
                 viewModelScope.launch {
                     val movie = Movies(
@@ -72,6 +73,7 @@ class MovieDetailViewModel @Inject constructor(
                     favMovieUseCases.addMovie(movie)
                 }
             }
+
             is FavEvent.DeleteMovie<*> -> {
                 viewModelScope.launch {
                     val movie = Movies(
@@ -87,7 +89,8 @@ class MovieDetailViewModel @Inject constructor(
             }
         }
     }
-    fun getByTitle(title:String) : Flow<Movies> {
+
+    fun getByTitle(title: String): Flow<Movies> {
         return favMovieUseCases.getByTitle(title)
     }
 }

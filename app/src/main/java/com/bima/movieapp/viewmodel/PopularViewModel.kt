@@ -9,7 +9,7 @@ import com.bima.movieapp.common.Constant
 import com.bima.movieapp.common.FavEvent
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.data.local.entity.Movies
-import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_movie.FavMovieUseCases
 import com.bima.movieapp.domain.use_case.get_popular.GetPopularUseCase
 import com.bima.movieapp.viewmodel.state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel

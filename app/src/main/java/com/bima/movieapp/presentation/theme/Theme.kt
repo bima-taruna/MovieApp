@@ -1,10 +1,11 @@
 package com.bima.movieapp.presentation.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.bima.movieapp.viewmodel.UiThemeViewModel
 
 
 private val LightColors = lightColorScheme(
@@ -74,10 +75,12 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun AppTheme(
-  useDarkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable () -> Unit
+    viewModel: UiThemeViewModel = hiltViewModel(),
+    content: @Composable () -> Unit,
 ) {
-  val colors = if (!useDarkTheme) {
+    viewModel.saveUiSettings(false)
+
+  val colors = if (!viewModel.getUiSettings()!!) {
     LightColors
   } else {
     DarkColors

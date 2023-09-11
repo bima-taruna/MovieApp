@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.data.local.entity.Movies
-import com.bima.movieapp.domain.use_case.get_fav_note.FavMovieUseCases
+import com.bima.movieapp.domain.use_case.get_fav_movie.FavMovieUseCases
 import com.bima.movieapp.viewmodel.state.FavState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
