@@ -33,12 +33,13 @@ fun SeeMore(
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary
         )
         TextButton(onClick = {
             navController.navigate(Screen.MovieListScreen.route + "/" + type)
         }) {
-            Text(text = "See More", fontWeight = FontWeight.Bold)
+            Text(text = "See More", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
         }
     }
 }

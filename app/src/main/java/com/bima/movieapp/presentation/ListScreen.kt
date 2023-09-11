@@ -28,11 +28,31 @@ fun ListScreen(
 ) {
     val state = viewModel.state.value
     val title = navController.currentBackStackEntry?.arguments?.getString("type")
+
+    fun fixTitle(title:String) : String {
+        val newTitle = mutableListOf<Char>()
+
+        for (i in title.indices) {
+            newTitle.add(title[i])
+        }
+
+        for (i in newTitle.indices) {
+            if (i == 0) {
+               newTitle[0] = newTitle[0].uppercaseChar()
+            }
+            if (newTitle[i] == '_') {
+                newTitle[i] = ' '
+            }
+        }
+
+        return newTitle.joinToString("")
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    if (title.isNullOrEmpty()) Text("") else Text(title)
+                    if (title.isNullOrEmpty()) Text("") else Text(fixTitle(title))
                 },
                 navigationIcon = {
                     IconButton(onClick = {

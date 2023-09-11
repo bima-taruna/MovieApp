@@ -1,5 +1,6 @@
 package com.bima.movieapp.presentation.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,19 +49,13 @@ fun DetailContent(
             ) {
                 ConstraintLayout() {
                     val (backdrop, title, genres, favorite) = createRefs()
-                    GlideImage(
-                        imageModel = { Constant.IMG_URL + movie.backdropPath },
-                        imageOptions = ImageOptions(
-                            contentScale = ContentScale.FillWidth
-                        ),
-                        loading = {
-                            ImageLoading()
-                        },
-                        failure = {
-                            ImageNotFound()
-                        },
-                        modifier = modifier.width(windowInfo.screenWidth / 2).constrainAs(backdrop) {}
-                    )
+                    Box(
+                        modifier = modifier
+                            .width(windowInfo.screenWidth / 2)
+                            .constrainAs(backdrop) {}
+                    ) {
+                       BackdropImage(state = movie, index = null)
+                    }
                     Text(
                         text = movie.title.toString(),
                         style = MaterialTheme.typography.titleLarge,
@@ -68,11 +63,13 @@ fun DetailContent(
                         maxLines = 2,
                         textAlign = TextAlign.Center,
                         overflow = TextOverflow.Ellipsis,
-                        modifier = modifier.fillMaxWidth(0.3f).constrainAs(title) {
-                            top.linkTo(backdrop.bottom, margin = 8.dp)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
+                        modifier = modifier
+                            .fillMaxWidth(0.3f)
+                            .constrainAs(title) {
+                                top.linkTo(backdrop.bottom, margin = 8.dp)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            }
                     )
                     IconButton(
                         onClick = onClick,
@@ -120,21 +117,13 @@ fun DetailContent(
                 ConstraintLayout {
                     val (backDrop, poster, title, genres, favorite) = createRefs()
                     createHorizontalChain(poster, title, chainStyle = ChainStyle.Spread)
-                    GlideImage(
-                        imageModel = { Constant.IMG_URL + movie.backdropPath },
-                        imageOptions = ImageOptions(
-                            contentScale = ContentScale.FillWidth
-                        ),
-                        loading = {
-                            ImageLoading()
-                        },
-                        failure = {
-                            ImageNotFound()
-                        },
+                    Box(
                         modifier = modifier
                             .fillMaxWidth()
                             .constrainAs(backDrop) {},
-                    )
+                    ) {
+                       BackdropImage(state = movie, index = null)
+                    }
                     IconButton(
                         onClick = onClick,
                         modifier = modifier

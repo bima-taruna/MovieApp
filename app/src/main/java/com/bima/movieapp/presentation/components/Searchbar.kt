@@ -20,7 +20,7 @@ fun SearchBar(
     var text by remember { mutableStateOf("") }
     val localKeyboard = LocalSoftwareKeyboardController.current
 
-    SearchField(text = text, onChange = { text = it; viewModel.query = it}, keyboard = localKeyboard) {
+    SearchField(text = text, onChange = { if(it.length <= 30) text = it; viewModel.query = it}, keyboard = localKeyboard) {
         viewModel.getSearchMovie()
     }
 
