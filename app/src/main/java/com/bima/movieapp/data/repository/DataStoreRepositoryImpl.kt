@@ -7,7 +7,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.bima.movieapp.domain.repository.DataStoreRepository
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "ui_mode_preference")
@@ -23,9 +24,10 @@ class DataStoreRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUiMode(key: String): Boolean {
+    override suspend fun getUiMode(key: String): Flow<Boolean> {
         val preferencesUiKey = booleanPreferencesKey("isDarkMode")
-        val preferences = context.dataStore.data.first()
-        return preferences[preferencesUiKey] ?: false
+        return context.dataStore.data.map {pref ->
+            pref[preferencesUiKey] ?: false
+        }
     }
 }

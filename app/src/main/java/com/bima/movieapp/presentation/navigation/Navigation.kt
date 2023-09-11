@@ -9,6 +9,7 @@ import com.bima.movieapp.presentation.HomeScreen
 import com.bima.movieapp.presentation.ListScreen
 import com.bima.movieapp.presentation.MovieDetailScreen
 import com.bima.movieapp.presentation.SearchScreen
+import com.bima.movieapp.presentation.SettingsScreen
 
 @Composable
 fun Navigation(
@@ -37,6 +38,11 @@ fun Navigation(
             route = Screen.MovieFavoriteScreen.route
         ) {
             FavoriteScreen(navController = navController)
+        }
+        composable(
+            route = Screen.SettingsScreen.route
+        ) {
+            SettingsScreen()
         }
         composable(
             route = Screen.MovieListScreen.route + "/{type}"

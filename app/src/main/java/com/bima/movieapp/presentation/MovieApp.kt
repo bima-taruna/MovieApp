@@ -33,7 +33,8 @@ fun MovieApp(
     val bottomNavigationItems = listOf(
        Screen.NowPlayingScreen,
         Screen.MovieSearchScreen,
-        Screen.MovieFavoriteScreen
+        Screen.MovieFavoriteScreen,
+        Screen.SettingsScreen
     )
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -47,6 +48,9 @@ fun MovieApp(
             bottomBarState.value = true
         }
         "movie_favorite_screen" -> {
+            bottomBarState.value = true
+        }
+        "settings_screen" -> {
             bottomBarState.value = true
         }
         "movie_list_screen/{type}" -> {

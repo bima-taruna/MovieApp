@@ -15,7 +15,6 @@ class UiThemeViewModel @Inject constructor(
     private val setUiMode: SetUiMode
 ) :ViewModel() {
 
-
     fun saveUiSettings(value:Boolean) {
         viewModelScope.launch {
             setUiMode.invoke(value)
