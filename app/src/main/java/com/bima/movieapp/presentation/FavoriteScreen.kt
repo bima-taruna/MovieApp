@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -33,7 +33,7 @@ fun FavoriteScreen(
     navController: NavController,
 ) {
     val state = viewModel.state.value
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable { mutableStateOf("") }
     val localKeyboard = LocalSoftwareKeyboardController.current
     Column(modifier = Modifier.padding(16.dp)) {
         SearchField(

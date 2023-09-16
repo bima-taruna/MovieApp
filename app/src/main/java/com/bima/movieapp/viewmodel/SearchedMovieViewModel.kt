@@ -6,12 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bima.movieapp.common.Resource
 import com.bima.movieapp.domain.model.MovieList
-import com.bima.movieapp.domain.use_case.get_movie_list.GetMovieListUseCase
 import com.bima.movieapp.domain.use_case.get_searched_movie.GetSearchedMovieUseCase
 import com.bima.movieapp.viewmodel.state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +23,7 @@ class SearchedMovieViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(MoviesState())
     val state: State<MoviesState> = _state
-    var query by mutableStateOf("")
+    var query = ""
     var page by mutableStateOf(1)
     private val movieList = mutableStateListOf<MovieList>()
     private fun searchMovie() {
