@@ -24,7 +24,7 @@ class SearchedMovieViewModel @Inject constructor(
     private val _state = mutableStateOf(MoviesState())
     val state: State<MoviesState> = _state
     var query = ""
-    var page by mutableStateOf(1)
+    private var page by mutableStateOf(1)
     private val movieList = mutableStateListOf<MovieList>()
     private fun searchMovie() {
         getSearchedMovieUseCase(query, page).onEach { result ->
