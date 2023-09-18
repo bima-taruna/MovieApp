@@ -4,8 +4,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bima.movieapp.viewmodel.UiThemeViewModel
 
@@ -80,8 +78,8 @@ fun AppTheme(
     viewModel: UiThemeViewModel = hiltViewModel(),
     content: @Composable () -> Unit,
 ) {
-    val isDarkTheme by viewModel.getUiSettings().collectAsState(initial = false)
-  val colors = if (!isDarkTheme) {
+    val isDarkTheme = viewModel.uiMode.value
+  val colors = if (!isDarkTheme!!) {
     LightColors
   } else {
     DarkColors
