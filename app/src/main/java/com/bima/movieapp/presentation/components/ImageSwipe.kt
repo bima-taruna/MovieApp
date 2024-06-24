@@ -49,7 +49,9 @@ fun ImageSwipe(
     navController: NavController,
 ) {
     val state = viewModel.state.value
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(
+        pageCount = { state.movieList.size }
+    )
     val windowInfo = rememberWindowInfo()
     val backDropHeight = if (windowInfo.screenWidthInfo != WindowInfo.WindowType.Compact) windowInfo.screenHeight / 1.75f else windowInfo.screenHeight / 3
 
@@ -59,7 +61,7 @@ fun ImageSwipe(
             .fillMaxHeight(0.55f)
     ) {
         HorizontalPager(
-            pageCount = state.movieList.size,
+//            pageCount = state.movieList.size,
             state = pagerState,
         ) { index ->
             val movieTitle = state.movieList[index].title

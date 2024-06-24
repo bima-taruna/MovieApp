@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
 
 package com.bima.movieapp.presentation.components.tabs
 
@@ -17,7 +17,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun DetailTabs(content:String,movieId:String,modifier: Modifier = Modifier) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(
+        pageCount = { tabsItem(content, movieId).size }
+    )
     val coroutineScope = rememberCoroutineScope()
     Column (
         modifier = modifier
@@ -34,7 +36,7 @@ fun DetailTabs(content:String,movieId:String,modifier: Modifier = Modifier) {
             }
         }
         HorizontalPager(
-            pageCount = tabsItem(content, movieId).size,
+//            pageCount = tabsItem(content, movieId).size,
             state = pagerState
         ) {
             tabsItem(content, movieId)[pagerState.currentPage].screen()
