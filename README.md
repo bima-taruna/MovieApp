@@ -2,20 +2,13 @@
 
 A movie app is a mobile application designed to provide users with access to a vast collection of films and TV shows.
 
-| First Header  | Second Header |
-| ------ | ---- |
-| Content Cell  | dasdasdasd |
-| Content Cell  | Content Cell  |
 
 ## Features
 
-**Browse, see detail, and search for your favorite movies!**
+| Browse, see detail, and search for your favorite movies!  | Responsive Design |
+| ------ | ---- |
+| ![screenshot1](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719381976/movie%20app/v6k4ze8ynsnjlli5jg3j.gif)  | ![screenshot2](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386488/responsive_fiibya.gif) |
 
-![screenshot1](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719381976/movie%20app/v6k4ze8ynsnjlli5jg3j.gif)
-
-**Responsive Design**
-
-![screenshot2](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386488/responsive_fiibya.gif)
 
 **Dark/Night Mode**
 
