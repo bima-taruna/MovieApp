@@ -1,4 +1,4 @@
-# Movie App
+![Banner](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719387862/Movie_App_q7mlnj.png)
 
 A movie app is a mobile application designed to provide users with access to a vast collection of films and TV shows.
 
