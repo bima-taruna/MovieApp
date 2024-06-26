@@ -4,6 +4,10 @@ A movie app is a mobile application designed to provide users with access to a v
 
 ## Features
 
+**Browse, see detail, and search for your favorite movies!**
+
+![screenshot1](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719381976/movie%20app/v6k4ze8ynsnjlli5jg3j.gif)
+
 
 ## Installation
 
