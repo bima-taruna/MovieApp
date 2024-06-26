@@ -18,6 +18,8 @@ A movie app is a mobile application designed to provide users with access to a v
 
 **Tag and save the movie as your favorite!**
 
+![screenshot4](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719387039/favorite_kozw6g.gif)
+
 
 ## Installation
 
