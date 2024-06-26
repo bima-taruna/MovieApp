@@ -13,6 +13,12 @@ A movie app is a mobile application designed to provide users with access to a v
 | ------ | ---- |
 | ![screenshot3](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386736/nightmode_vg1ids.gif)  | ![screenshot4](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719387039/favorite_kozw6g.gif) |
 
+## Tech Stack
+
+- **Kotlin**: The primary programming language used for Android development, known for its conciseness, safety, and interoperability with Java.
+- **Jetpack Compose**: A modern toolkit for building native UI in Android. It simplifies and accelerates UI development with less code and powerful tools.
+- **Room**: A persistence library that provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+
 ## Installation
 
 To set up and run this project on your local machine, follow these steps:
