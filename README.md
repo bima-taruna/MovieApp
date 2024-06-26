@@ -9,15 +9,9 @@ A movie app is a mobile application designed to provide users with access to a v
 | ------ | ---- |
 | ![screenshot1](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719381976/movie%20app/v6k4ze8ynsnjlli5jg3j.gif)  | ![screenshot2](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386488/responsive_fiibya.gif) |
 
-
-**Dark/Night Mode**
-
-![screenshot3](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386736/nightmode_vg1ids.gif)
-
-**Tag and save the movie as your favorite!**
-
-![screenshot4](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719387039/favorite_kozw6g.gif)
-
+| Dark/Night Mode  | Tag and save the movie as your favorite! |
+| ------ | ---- |
+| ![screenshot3](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719386736/nightmode_vg1ids.gif)  | ![screenshot4](https://res.cloudinary.com/dsxvvjpi4/image/upload/v1719387039/favorite_kozw6g.gif) |
 
 ## Installation
 
